@@ -7,17 +7,20 @@ import "./global.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RoutinePage from "./pages/routine";
 import DicePage from "./pages/dice";
+import Layout from "./component/common/layout/layout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/routine" element={<RoutinePage />} />
-        <Route path="/dice" element={<DicePage />} />
-      </Routes>
-    </BrowserRouter>
+    <Layout>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/routine" element={<RoutinePage />} />
+          <Route path="/dice" element={<DicePage />} />
+        </Routes>
+      </BrowserRouter>
+    </Layout>
   </React.StrictMode>
 );
 
