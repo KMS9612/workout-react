@@ -10,6 +10,9 @@
   text-decoration: none;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .login_form > form {
   width: 100%;
@@ -20,10 +23,7 @@
 }
 form > h2 {
   margin-bottom: 50px;
-  color: linear;
-  background: linear-gradient(to right, var(--wo-primary), var(--wo-purple));
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #fff;
 }
 form > input {
   width: 100%;
@@ -37,10 +37,6 @@ form > input {
 form > input:focus {
   border: 1px solid #ed7089;
 }
-form > button {
-  width: 100%;
-  height: 30px;
-}
 
 .login_btn {
   width: 100%;
@@ -51,28 +47,15 @@ form > button {
   border: none;
   border-radius: 5px;
   background: linear-gradient(to right, var(--wo-primary), var(--wo-purple));
-  cursor: pointer;
 }
-.signup_btn_wrap {
+.default_link > .signup_btn {
   width: 100%;
   height: 30px;
-  z-index: 0;
-  background: linear-gradient(to right, var(--wo-primary), var(--wo-purple));
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-}
-.signup_btn {
-  width: 98%;
-  height: 25px;
   color: var(--wo-primary);
   font-weight: 700;
-  border: none;
+  border: 1px solid #ed7089;
   border-radius: 5px;
-  z-index: 1;
   background-color: #fff;
-  cursor: pointer;
 }
 .login_form {
   width: 100%;

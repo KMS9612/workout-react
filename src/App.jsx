@@ -1,11 +1,11 @@
 import "./App.css";
-import LoginForm from "./component/common/loginForm/loginForm";
+import Login from "./pages/login";
 
 function App() {
   return (
     <div className="home_wrapper">
       <div className="login_wrap">
-        <LoginForm />
+        <Login />
       </div>
     </div>
   );

@@ -1,14 +1,15 @@
 import Navigation from "./nav";
 import "../../../style/layout.css";
+import { useLocation } from "react-router";
 
 export default function Layout(props) {
-  // 현재 path정보를 저장하는 변수
-  const currentUrl = window.location.pathname;
-  // path정보에 따라 layout을 숨겨주는 배열
-  const hiddenLayout = ["/"];
+  const location = useLocation();
+  const hiddenLayout = ["/", "/signup", "/login"]; // nav를 숨기고 싶은 페이지를 배열에 추가
+  const isHidden = hiddenLayout.includes(location.pathname);
+
   return (
     <div className="body_wrapper">
-      {!hiddenLayout.includes(currentUrl) ? <Navigation /> : <span></span>}
+      {!isHidden && <Navigation />}
       {props.children}
     </div>
   );

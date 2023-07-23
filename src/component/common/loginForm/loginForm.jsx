@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import LoginInput from "../../util/inputs/loginInput";
-import "./loginForm.css";
+import "../../../style/loginForm.css";
+
 export default function LoginForm() {
   const [isEmail, setIsEmail] = useState(true);
   const checkEmail = (event) => {
@@ -21,13 +22,15 @@ export default function LoginForm() {
       <LoginInput isEmail={isEmail} checkEmail={checkEmail} />
       <input type="password" placeholder="비밀번호를 입력해 주세요" />
       <Link className="default_link" to="/routine">
-        <button className="login_btn">로그인</button>
+        <button type="button" className="login_btn">
+          로그인
+        </button>
       </Link>
-      <div className="signup_btn_wrap">
-        <button type="" className="signup_btn">
+      <Link className="default_link" to="/signup">
+        <button type="button" className="signup_btn">
           회원가입
         </button>
-      </div>
+      </Link>
     </form>
   );
 }

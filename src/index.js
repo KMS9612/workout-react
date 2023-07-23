@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DicePage from "./pages/dice";
 import RoutinePage from "./pages/routine";
 import Layout from "./component/common/layout/layout";
+import SignUp from "./pages/signup";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -19,6 +20,7 @@ root.render(
           <Route path="/" element={<App />} />
           <Route path="/routine" element={<RoutinePage />} />
           <Route path="/dice" element={<DicePage />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </Layout>
     </BrowserRouter>
