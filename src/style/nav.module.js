@@ -1,4 +1,6 @@
-.nav_wrapper {
+import styled from "@emotion/styled";
+
+export const NavWrapper = styled.div`
   width: 10vw;
   display: flex;
   flex-direction: column;
@@ -9,11 +11,11 @@
   background: linear-gradient(to right, var(--wo-primary), var(--wo-second));
   border-radius: 15px;
   margin-left: 10px;
-}
+`;
 
-.button_wrapper {
+export const ButtonWrapper = styled.div`
   width: 95%;
   padding: 5px;
   text-decoration: none;
   cursor: pointer;
-}
+`;

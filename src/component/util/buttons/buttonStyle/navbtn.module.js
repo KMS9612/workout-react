@@ -1,4 +1,6 @@
-.nav_button {
+import styled from "@emotion/styled";
+
+export const NavBtn = styled.div`
   width: 100%;
   height: 35px;
   border: none;
@@ -6,9 +8,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #fff;
-  background: linear-gradient(to left, var(--wo-primary), var(--wo-second));
-  color: #fff;
+  border: 1px solid #ff8375;
+  background-color: #fff;
+  color: #ff8375;
   font-size: 14px;
   font-weight: 700;
-}
+`;
