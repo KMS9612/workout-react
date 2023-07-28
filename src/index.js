@@ -9,20 +9,24 @@ import DicePage from "./pages/dice";
 import RoutinePage from "./pages/routine";
 import Layout from "./component/common/layout/layout";
 import SignUp from "./pages/signup";
+import { ThemeProvider } from "@emotion/react";
+import theme from "./emotion.theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/routine" element={<RoutinePage />} />
-          <Route path="/dice" element={<DicePage />} />
-          <Route path="/signup" element={<SignUp />} />
-        </Routes>
-      </Layout>
+      <ThemeProvider theme={theme}>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/routine" element={<RoutinePage />} />
+            <Route path="/dice" element={<DicePage />} />
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        </Layout>
+      </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

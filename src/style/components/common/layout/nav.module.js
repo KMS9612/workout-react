@@ -7,8 +7,11 @@ export const NavWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding: 30px 0px 0px 0px;
-  border: 1px solid var(--wo-primary);
-  background: linear-gradient(to right, var(--wo-primary), var(--wo-second));
+  border: 1px solid ${(props) => props.theme.color.primary};
+  background-color: [linear-gradient(
+      ${(props) => props.theme.color.primary},
+      ${(props) => props.theme.color.second}
+    )];
   border-radius: 15px;
   margin-left: 10px;
 `;

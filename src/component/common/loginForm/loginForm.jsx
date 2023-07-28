@@ -1,6 +1,4 @@
-import { useState } from "react";
-import LoginInput from "../../util/inputs/formInput";
-import * as S from "../../../style/loginForm.module.js";
+import * as S from "../../../style/components/common/loginForm/loginForm.module.js";
 import LoginBtn from "../../util/buttons/loginBtn";
 import SignupBtn from "../../util/buttons/signupBtn";
 import FormInput from "../../util/inputs/formInput";

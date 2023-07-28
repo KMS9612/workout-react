@@ -1,5 +1,5 @@
 import Navigation from "./nav";
-import "../../../style/layout.css";
+import * as S from "../../../style/components/common/layout/layout.module.js";
 import { useLocation } from "react-router";
 
 export default function Layout(props) {
@@ -8,9 +8,9 @@ export default function Layout(props) {
   const isHidden = hiddenLayout.includes(location.pathname);
 
   return (
-    <div className="body_wrapper">
+    <S.BodyWrapper>
       {!isHidden && <Navigation />}
       {props.children}
-    </div>
+    </S.BodyWrapper>
   );
 }

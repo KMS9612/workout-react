@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import * as S from "../../../style/nav.module.js";
+import * as S from "../../../style/components/common/layout/nav.module.js";
 import NavButton from "../../util/buttons/navbtn";
 
 export default function Navigation() {
   return (
-    <S.NavWrapper className="nav_wrapper">
+    <S.NavWrapper>
       <h1>Workout</h1>
       <Link className="button_wrapper" to="/routine">
         <NavButton buttonName="루틴관리"></NavButton>
