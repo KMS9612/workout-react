@@ -5,5 +5,5 @@ export const BodyWrapper = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: row;
-  background-color: ${(props) => props.theme.color.backGround};
+  background-color: ${(props) => (props.isWhite ? props.theme.color.backGround : "#fff")};
 `;

@@ -8,9 +8,18 @@ export const HomeWrapper = styled.div`
   align-items: center;
 `;
 export const LoginWrap = styled.div`
-  width: 30%;
-  height: 50%;
-  border: 3px solid #fff;
-  background-color: #fff;
-  border-radius: 10px;
+  @media screen and (min-width: 800px) {
+    width: 500px;
+    height: 50%;
+    border: 3px solid #fff;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  @media screen and (max-width: 800px) {
+    width: 400px;
+    height: 50%;
+    border: 3px solid #fff;
+    background-color: #fff;
+    border-radius: 10px;
+  }
 `;

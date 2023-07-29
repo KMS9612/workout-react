@@ -6,6 +6,7 @@ const theme = {
     navColor: "#405d9d",
     itemColor: "#7760a6",
     purpleColor: "#a762a5",
+    hoverPrimary: "#FFECEA",
   },
 };
 
