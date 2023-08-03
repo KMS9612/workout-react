@@ -6,7 +6,7 @@ export const NavWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 20px 10px 0px 10px;
+  padding: 50px 10px 0px 10px;
   border-right: 1px solid #fff;
   background-color: ${(props) => props.theme.color.navcolor};
   border-radius: 15px;
@@ -14,7 +14,10 @@ export const NavWrapper = styled.div`
 
 export const Header1 = styled.h1`
   color: ${(props) => props.theme.color.second};
-  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ItemWrap = styled.div`

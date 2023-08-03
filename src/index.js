@@ -12,6 +12,7 @@ import SignUp from "./pages/signup";
 import { ThemeProvider } from "@emotion/react";
 import theme from "./emotion.theme";
 import Loading from "./component/util/loading/loading";
+import DashBoard from "./pages/dashboard";
 
 // Community 컴포넌트 lazy로딩을 위한 상수
 const Community = lazy(() => import("./pages/community"));
@@ -30,6 +31,7 @@ root.render(
               <Route path="/dice" element={<DicePage />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/community" element={<Community />} />
+              <Route path="/dashboard" element={<DashBoard />} />
             </Routes>
           </Suspense>
         </Layout>

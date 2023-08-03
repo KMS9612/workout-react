@@ -11,7 +11,7 @@ export default function LoginForm() {
       {/* <LoginInput isEmail={isEmail} checkEmail={checkEmail} /> */}
       <FormInput type="email" PH="아이디를 입력해 주세요" />
       <FormInput type="password" PH="비밀번호를 입력해 주세요" />
-      <DefaultLink width="100%" to="/routine">
+      <DefaultLink width="100%" to="/dashboard">
         <LoginBtn />
       </DefaultLink>
       <DefaultLink width="100%" to="/signup">
