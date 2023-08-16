@@ -13,6 +13,10 @@ import { ThemeProvider } from "@emotion/react";
 import theme from "./emotion.theme";
 import Loading from "./component/util/loading/loading";
 import DashBoard from "./pages/dashboard";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
 // Community 컴포넌트 lazy로딩을 위한 상수
 const Community = lazy(() => import("./pages/community"));
