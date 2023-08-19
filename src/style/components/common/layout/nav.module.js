@@ -8,12 +8,12 @@ export const NavWrapper = styled.div`
   align-items: center;
   padding: 50px 10px 0px 10px;
   border-right: 1px solid #fff;
-  background-color: ${(props) => props.theme.color.navcolor};
+  background-color: #fff;
   border-radius: 15px;
 `;
 
 export const Header1 = styled.h1`
-  color: ${(props) => props.theme.color.second};
+  color: #000;
   display: flex;
   flex-direction: column;
   justify-content: center;

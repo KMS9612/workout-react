@@ -9,12 +9,13 @@ export const NavBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid ${(props) => props.theme.color.primary};
+  border: 1px solid #ff8375;
   background-color: #fff;
-  color: ${(props) => props.theme.color.second};
+  color: #ff8375;
   font-size: 14px;
   font-weight: 700;
   &:hover {
-    background-color: ${(props) => props.theme.color.hoverPrimary};
+    background-color: #ff8375;
+    color: #fff;
   }
 `;

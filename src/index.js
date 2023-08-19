@@ -1,6 +1,5 @@
 import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./global.css";
@@ -9,7 +8,7 @@ import DicePage from "./pages/dice";
 import RoutinePage from "./pages/routine";
 import Layout from "./component/common/layout/layout";
 import SignUp from "./pages/signup";
-import { ThemeProvider } from "@emotion/react";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import theme from "./emotion.theme";
 import Loading from "./component/util/loading/loading";
 import DashBoard from "./pages/dashboard";
@@ -25,8 +24,13 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet" />
     <BrowserRouter>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Layout>
           <Suspense fallback={<Loading />}>
             <Routes>

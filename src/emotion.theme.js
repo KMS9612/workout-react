@@ -1,13 +1,20 @@
-const theme = {
-  color: {
-    primary: "#ff8375",
-    second: "#ed7089",
-    backGround: "#424755",
-    navColor: "#405d9d",
-    itemColor: "#7760a6",
-    purpleColor: "#a762a5",
-    hoverPrimary: "#FFECEA",
+import { createTheme } from "@mui/material";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#ff8375",
+
+      contrastText: "#FFFFFF",
+    },
+    custom: {
+      main: "#ff8375",
+    },
   },
-};
+  typography: {
+    fontFamily: ["Black Han Sans", "sans-serif"].join(","),
+    // fontFamily: ["Black Hans Sans", "-apple-system", "BlinkMacSystemFont", '"Segoe UI"', "Roboto", '"Helvetica Neue"', "Arial", "sans-serif", '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"'].join(","),
+  },
+});
 
 export default theme;
