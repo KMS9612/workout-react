@@ -12,7 +12,7 @@ export default function LoginForm() {
       <FormInput type="email" PH="아이디를 입력해 주세요" />
       <FormInput type="password" PH="비밀번호를 입력해 주세요" />
       <DefaultLink width="100%" to="/routine">
-        <LoginBtn />
+        <LoginBtn buttonName="로그인" />
       </DefaultLink>
       <DefaultLink width="100%" to="/signup">
         <SignupBtn />
