@@ -23,10 +23,7 @@ export default function LoginForm() {
     })
       .then((res) => {
         console.log(res.data.message);
-        localStorage.setItem(
-          "workoutToken",
-          JSON.stringify(res.data.accessToken)
-        );
+        localStorage.setItem("workoutToken", JSON.stringify(res.data.accessToken));
         router("/dashboard");
       })
       .catch((res) => {
@@ -37,25 +34,10 @@ export default function LoginForm() {
     <S.LoginForm>
       <S.LoginFormHeader>Work Out 로그인</S.LoginFormHeader>
       {/* <LoginInput isEmail={isEmail} checkEmail={checkEmail} /> */}
-<<<<<<< HEAD
-      <FormInput type="email" PH="아이디를 입력해 주세요" />
-      <FormInput type="password" PH="비밀번호를 입력해 주세요" />
-      <DefaultLink width="100%" to="/routine">
-        <LoginBtn buttonName="로그인" />
-      </DefaultLink>
-      <DefaultLink width="100%" to="/signup">
-        <SignupBtn />
-      </DefaultLink>
-=======
       <FormInput type="email" PH="아이디를 입력해 주세요" setEmail={setEmail} />
-      <FormInput
-        type="password"
-        PH="비밀번호를 입력해 주세요"
-        setPassword={setPassword}
-      />
+      <FormInput type="password" PH="비밀번호를 입력해 주세요" setPassword={setPassword} />
       <LoginBtn onClickLogin={onClickLogin} />
       <SignupBtn />
->>>>>>> 7e4a2ff9b839430a52f5486c3b10d142a557a5da
       <div>아이디 찾기 자리 / 비밀번호 찾기 자리</div>
       <div>-or-</div>
       <div>Naver / Kakao 로그인 자리</div>
