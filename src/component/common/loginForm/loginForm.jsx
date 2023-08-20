@@ -44,6 +44,7 @@ export default function LoginForm() {
       .then((res) => {
         handleModal(true, "로그인에 성공했습니다", "Workout!");
         localStorage.setItem("workoutToken", JSON.stringify(res.data.accessToken));
+        localStorage.setItem("workoutRefreshToken", JSON.stringify(res.data.refreshToken));
         router("/dashboard");
       })
       .catch((res) => {

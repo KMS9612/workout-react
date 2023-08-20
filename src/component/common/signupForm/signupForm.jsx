@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 import * as S from "../../../style/components/common/signupForm/signupForm.module";
+import FormInput from "../../util/inputs/formInput";
 export default function SignupForm() {
   const [EMAIL_DATA, setEMAIL_DATA] = useState("");
   const [PASSWORD_DATA, setPASSWORD_DATA] = useState("");
+  const [USER_NAME, setUSER_NAME] = useState("");
   const [isMatch, setIsMatch] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onClickCofirmSignup = async () => {
     await axios({
@@ -25,8 +28,12 @@ export default function SignupForm() {
 
     if (status === "email") {
       setEMAIL_DATA(targetValue);
-    } else if (status === "password") {
+    }
+    if (status === "password") {
       setPASSWORD_DATA(targetValue);
+    }
+    if (status === "name") {
+      setUSER_NAME(targetValue);
     }
   };
 
@@ -40,33 +47,35 @@ export default function SignupForm() {
     }
   };
   return (
-    <S.SignUpForm action="">
-      <S.SignUpInput
-        placeholder="이메일"
-        type="email"
-        data-status="email"
-        onChange={onChangeSaveValue}
-      />
-      <S.SignUpInput
-        placeholder="비밀번호"
-        type="password"
-        data-status="password"
-        onChange={onChangeSaveValue}
-      />
-      <S.SignUpInput
-        placeholder="비밀번호 재확인"
-        type="password"
-        data-status="password_match"
-        onChange={checkPasswordMatch}
-      />
-      <S.SignUpButton
-        type="button"
-        className="confirm_signup"
-        onClick={onClickCofirmSignup}
-        disabled={!isMatch}
-      >
-        확인
-      </S.SignUpButton>
+    <S.SignUpForm component="form">
+      {/* 웨이브 bg 시작 */}
+      <S.Left_SignUp>
+        <S.LoadingContainer>
+          <S.LoadingText>Workout</S.LoadingText>
+          <S.LoadingWave />
+        </S.LoadingContainer>
+      </S.Left_SignUp>
+      {/* 웨이브 bg 종료 */}
+
+      {/* 로그인 폼 시작 */}
+      <S.Right_SignUp>
+        <S.SignUpFormHeader>회원가입</S.SignUpFormHeader>
+        {/* <LoginInput isEmail={isEmail} checkEmail={checkEmail} /> */}
+        <S.InputStack spacing={4}>
+          <FormInput type="text" PH="Name" data-status="name" setPassword={setPASSWORD_DATA} />
+          <FormInput type="email" PH="Email" data-status="email" setEmail={setEMAIL_DATA} />
+          <FormInput type="password" PH="Password" data-status="password" setPassword={setPASSWORD_DATA} />
+        </S.InputStack>
+        <S.BtnStack spacing={2}>
+          <S.SignUpBtn loading={isLoading} variant="contained">
+            회원가입
+          </S.SignUpBtn>
+          <S.SignUpBtn type="button" variant="outlined">
+            취소
+          </S.SignUpBtn>
+        </S.BtnStack>
+      </S.Right_SignUp>
+      {/* 로그인 폼 종료 */}
     </S.SignUpForm>
   );
 }
