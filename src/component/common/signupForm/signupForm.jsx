@@ -2,12 +2,16 @@ import axios from "axios";
 import { useState } from "react";
 import * as S from "../../../style/components/common/signupForm/signupForm.module";
 import FormInput from "../../util/inputs/formInput";
+import { useNavigate } from "react-router";
+
 export default function SignupForm() {
   const [EMAIL_DATA, setEMAIL_DATA] = useState("");
   const [PASSWORD_DATA, setPASSWORD_DATA] = useState("");
   const [USER_NAME, setUSER_NAME] = useState("");
   const [isMatch, setIsMatch] = useState();
   const [isLoading, setIsLoading] = useState(false);
+
+  const router = useNavigate();
 
   const onClickCofirmSignup = async () => {
     await axios({
@@ -46,6 +50,11 @@ export default function SignupForm() {
       setIsMatch(true);
     }
   };
+
+  const onClickMoveBack = () => {
+    console.log(router);
+    router(-1);
+  };
   return (
     <S.SignUpForm component="form">
       {/* 웨이브 bg 시작 */}
@@ -62,15 +71,34 @@ export default function SignupForm() {
         <S.SignUpFormHeader>회원가입</S.SignUpFormHeader>
         {/* <LoginInput isEmail={isEmail} checkEmail={checkEmail} /> */}
         <S.InputStack spacing={4}>
-          <FormInput type="text" PH="Name" data-status="name" setPassword={setPASSWORD_DATA} />
-          <FormInput type="email" PH="Email" data-status="email" setEmail={setEMAIL_DATA} />
-          <FormInput type="password" PH="Password" data-status="password" setPassword={setPASSWORD_DATA} />
+          <FormInput
+            type="text"
+            PH="Name"
+            data-status="name"
+            setPassword={setPASSWORD_DATA}
+          />
+          <FormInput
+            type="email"
+            PH="Email"
+            data-status="email"
+            setEmail={setEMAIL_DATA}
+          />
+          <FormInput
+            type="password"
+            PH="Password"
+            data-status="password"
+            setPassword={setPASSWORD_DATA}
+          />
         </S.InputStack>
         <S.BtnStack spacing={2}>
           <S.SignUpBtn loading={isLoading} variant="contained">
             회원가입
           </S.SignUpBtn>
-          <S.SignUpBtn type="button" variant="outlined">
+          <S.SignUpBtn
+            type="button"
+            variant="outlined"
+            onClick={onClickMoveBack}
+          >
             취소
           </S.SignUpBtn>
         </S.BtnStack>
