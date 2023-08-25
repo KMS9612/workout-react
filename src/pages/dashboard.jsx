@@ -1,3 +1,4 @@
+import * as S from "../style/page/dashboard.module";
 import DashBoardBox from "../component/util/box/dashboardBox";
 
 export default function DashBoard() {
@@ -7,9 +8,9 @@ export default function DashBoard() {
   ];
   const Routine = [{ routine_name: "등" }, { routine_name: "가슴" }];
   return (
-    <div>
+    <S.DBoardWrapper>
       <DashBoardBox title={"운동"} contents_map={Dummy}></DashBoardBox>
       <DashBoardBox title={"루틴"} contents_map={Dummy}></DashBoardBox>
-    </div>
+    </S.DBoardWrapper>
   );
 }

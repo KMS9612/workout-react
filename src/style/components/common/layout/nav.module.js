@@ -1,15 +1,21 @@
 import styled from "@emotion/styled";
+import { Button, Drawer } from "@mui/material";
 
-export const NavWrapper = styled.div`
-  width: 180px;
+export const NavDrawer = styled(Drawer)`
+  width: 1px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 50px 10px 0px 10px;
+
   border-right: 1px solid #fff;
   background-color: #fff;
   border-radius: 15px;
+`;
+
+export const NavWrapper = styled.div`
+  width: 100%;
+  text-align: center;
 `;
 
 export const Header1 = styled.h1`
@@ -18,6 +24,7 @@ export const Header1 = styled.h1`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const ItemWrap = styled.div`
@@ -25,4 +32,8 @@ export const ItemWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+`;
+
+export const HideNavButtons = styled(Button)`
+  font-size: 12px;
 `;
