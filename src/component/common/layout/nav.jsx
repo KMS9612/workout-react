@@ -33,6 +33,7 @@ export default function Navigation(props) {
       return;
     }
 
+    props.setIsOver(open);
     setState({ ...state, [anchor]: open });
   };
 

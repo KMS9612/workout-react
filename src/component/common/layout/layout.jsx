@@ -23,7 +23,7 @@ export default function Layout(props) {
     <S.BodyWrapper isWhite={isWhite}>
       {!isHidden && (
         <S.NavWrapper onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-          <Navigation isOver={isOver} />
+          <Navigation isOver={isOver} setIsOver={setIsOver} />
         </S.NavWrapper>
       )}
       {props.children}
