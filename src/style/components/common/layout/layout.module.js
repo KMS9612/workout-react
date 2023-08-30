@@ -8,3 +8,8 @@ export const BodyWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const NavWrapper = styled.div`
+  width: 100%;
+  height: 30px;
+`;

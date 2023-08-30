@@ -10,8 +10,14 @@ export const RoutineLayout = styled.div`
   padding: 20px;
 `;
 
-export const Component_grid = styled(Grid)``;
+export const Component_grid = styled(Grid)`
+  width: 100%;
+`;
 
-export const Exercise_grid = styled(Grid)``;
+export const Exercise_grid = styled(Grid)`
+  width: 50%;
+`;
 
-export const Routine_grid = styled(Grid)``;
+export const Routine_grid = styled(Grid)`
+  width: 50%;
+`;

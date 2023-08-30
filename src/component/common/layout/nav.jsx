@@ -1,11 +1,11 @@
 import * as S from "../../../style/components/common/layout/nav.module.js";
 import { useNavigate } from "react-router";
 import React, { useState } from "react";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import { DefaultLink } from "../../../style/components/util/Link/defaultLink.module.js";
 import NavButton from "../../util/buttons/navbtn.jsx";
 
-export default function Navigation() {
+export default function Navigation(props) {
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -66,7 +66,7 @@ export default function Navigation() {
   };
 
   return (
-    <S.NavWrapper>
+    <S.NavWrapper isOver={props.isOver}>
       {["left", "right", "top", "bottom"].map((anchor) => (
         <React.Fragment key={anchor}>
           <S.HideNavButtons onClick={toggleDrawer(anchor, true)}>

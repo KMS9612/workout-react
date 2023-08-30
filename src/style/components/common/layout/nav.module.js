@@ -16,6 +16,8 @@ export const NavDrawer = styled(Drawer)`
 export const NavWrapper = styled.div`
   width: 100%;
   text-align: center;
+  opacity: ${(props) => (props.isOver ? 1 : 0)};
+  transition: all 300ms;
 `;
 
 export const Header1 = styled.h1`
@@ -32,6 +34,7 @@ export const ItemWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  transition: all 300ms;
 `;
 
 export const HideNavButtons = styled(Button)`
