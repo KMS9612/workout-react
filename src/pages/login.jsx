@@ -9,7 +9,6 @@ export default function Login() {
     if (isLogin) {
       navigate("/dashboard");
     }
-    console.log(window.location.pathname);
   });
   return <LoginForm />;
 }

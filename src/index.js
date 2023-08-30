@@ -5,7 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import "./global.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DicePage from "./pages/dice";
-import RoutinePage from "./pages/routine";
+import ExercisePage from "./pages/exercise";
 import Layout from "./component/common/layout/layout";
 import SignUp from "./pages/signup";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -24,10 +24,16 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap"
+      rel="stylesheet"
+    />
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -35,7 +41,7 @@ root.render(
           <Suspense fallback={<Loading />}>
             <Routes>
               <Route path="/" element={<App />} />
-              <Route path="/routine" element={<RoutinePage />} />
+              <Route path="/exercise" element={<ExercisePage />} />
               <Route path="/dice" element={<DicePage />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/community" element={<Community />} />

@@ -12,18 +12,16 @@ export default function Layout(props) {
   const isHidden = hiddenLayout.includes(location.pathname);
   const isWhite = bgcLayout.includes(location.pathname);
   const onMouseEnter = () => {
-    console.log("Enter");
     setIsOver(true);
   };
   const onMouseLeave = () => {
-    console.log("leave");
     setIsOver(false);
   };
   return (
     <S.BodyWrapper isWhite={isWhite}>
       {!isHidden && (
         <S.NavWrapper onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-          <Navigation isOver={isOver} setIsOver={setIsOver} />
+          <Navigation isOver={isOver} onMouseLeave={onMouseLeave} />
         </S.NavWrapper>
       )}
       {props.children}

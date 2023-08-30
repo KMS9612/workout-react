@@ -7,7 +7,6 @@ export const NavDrawer = styled(Drawer)`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-
   border-right: 1px solid #fff;
   background-color: #fff;
   border-radius: 15px;

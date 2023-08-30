@@ -7,6 +7,7 @@ export default function DashBoardBox(props) {
       <S.BoxTitle>{props.title}</S.BoxTitle>
       {props.contents_map.map((el, index) => (
         <DashBoardItem
+          key={`${el}-${new Date().getTime()}-${index}`}
           contents={el.exercise_name || el.routine_name}
         ></DashBoardItem>
       ))}
