@@ -4,16 +4,25 @@ export default function FormInput(props) {
   const onChangeSaveValue = (event) => {
     if (props.type === "email") {
       props.setEmail(event.currentTarget.value);
-      console.log("email", event.currentTarget.value);
     }
     if (props.type === "password") {
       props.setPassword(event.currentTarget.value);
-      console.log("password", event.currentTarget.value);
     }
   };
   return (
     <>
-      <S.FormInput variant="outlined" type={props.type} className="login_input" label={props.PH} onChange={onChangeSaveValue} />
+      <S.FormInput
+        variant="outlined"
+        type={props.type}
+        className="login_input"
+        label={props.PH}
+        onChange={onChangeSaveValue}
+        onKeyDown={(key) => {
+          if (key.code === "Enter") {
+            props.onClickLogin();
+          }
+        }}
+      />
     </>
   );
 }

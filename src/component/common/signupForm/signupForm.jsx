@@ -52,7 +52,6 @@ export default function SignupForm() {
   };
 
   const onClickMoveBack = () => {
-    console.log(router);
     router(-1);
   };
   return (

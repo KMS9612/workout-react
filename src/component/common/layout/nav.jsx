@@ -31,7 +31,6 @@ export default function Navigation(props) {
     setState({ ...state, [anchor]: open });
   };
   const onClickNavigate = (path) => {
-    console.log(path);
     navigate(path);
   };
   const navList = (anchor) => {
