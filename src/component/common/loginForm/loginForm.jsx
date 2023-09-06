@@ -35,7 +35,7 @@ export default function LoginForm() {
     setButtonLoading(true);
     await axios({
       method: "post",
-      url: "http://localhost:8080/login",
+      url: "https://workout-back-3e9090b4fd41.herokuapp.com/login",
       data: {
         email,
         password,

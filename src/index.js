@@ -16,6 +16,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import ControlRoom from "./pages/control_room";
 
 // Community 컴포넌트 lazy로딩을 위한 상수
 const Community = lazy(() => import("./pages/community"));
@@ -46,6 +47,7 @@ root.render(
               <Route path="/signup" element={<SignUp />} />
               <Route path="/community" element={<Community />} />
               <Route path="/dashboard" element={<DashBoard />} />
+              <Route path="/control" element={<ControlRoom />} />
             </Routes>
           </Suspense>
         </Layout>
