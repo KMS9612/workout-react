@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   width: 300px;
-  height: 100px;
   border: 1px solid #ff8375;
   border-radius: 5px;
 `;
@@ -14,9 +13,16 @@ export const FinderTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 10px;
+  > span {
+    color: #fff;
+  }
 `;
 
 export const FinderContents = styled.div`
   width: 100%;
-  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 `;
