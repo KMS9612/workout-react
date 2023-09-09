@@ -17,6 +17,8 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import ControlRoom from "./pages/control_room";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 // Community 컴포넌트 lazy로딩을 위한 상수
 const Community = lazy(() => import("./pages/community"));
@@ -25,34 +27,30 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap"
-      rel="stylesheet"
-    />
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Layout>
-          <Suspense fallback={<Loading />}>
-            <Routes>
-              <Route path="/" element={<App />} />
-              <Route path="/exercise" element={<ExercisePage />} />
-              <Route path="/dice" element={<DicePage />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/community" element={<Community />} />
-              <Route path="/dashboard" element={<DashBoard />} />
-              <Route path="/control" element={<ControlRoom />} />
-            </Routes>
-          </Suspense>
-        </Layout>
-      </ThemeProvider>
-    </BrowserRouter>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet" />
+    <DndProvider backend={HTML5Backend}>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Layout>
+            <Suspense fallback={<Loading />}>
+              <Routes>
+                <Route path="/" element={<App />} />
+                <Route path="/exercise" element={<ExercisePage />} />
+                <Route path="/dice" element={<DicePage />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/community" element={<Community />} />
+                <Route path="/dashboard" element={<DashBoard />} />
+                <Route path="/control" element={<ControlRoom />} />
+              </Routes>
+            </Suspense>
+          </Layout>
+        </ThemeProvider>
+      </BrowserRouter>
+    </DndProvider>
   </React.StrictMode>
 );
 

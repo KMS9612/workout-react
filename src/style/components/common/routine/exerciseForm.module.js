@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Box, TextField, Typography } from "@mui/material";
 
 export const ExerciseWrapper = styled(Box)`
-  width: 100%;
+  width: ${(props) => (props.iswidget ? "30%" : "100%")};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -12,6 +12,8 @@ export const ExerciseWrapper = styled(Box)`
   overflow: hidden;
   padding-bottom: 20px;
   opacity: ${(props) => (props.isfocus === "true" ? "100%" : "50%")};
+  position: ${(props) => (props.iswidget ? "absolute" : "blcok")};
+  cursor: ${(props) => (props.iswidget ? "move" : "default")};
 `;
 
 export const ExerciseFormBox = styled(Box)`

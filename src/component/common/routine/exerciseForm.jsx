@@ -1,12 +1,16 @@
 import { Button, Stack } from "@mui/material";
 import * as S from "../../../style/components/common/routine/exerciseForm.module";
 import api from "../../../axios/axiosInstance";
-import { useState } from "react";
-export default function ExerciseForm() {
+import { useRef, useState } from "react";
+import { useDrag } from "react-dnd";
+import { ItemTypes } from "../control/ITEM_TYPE";
+
+export default function ExerciseForm(props) {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseType, setExerciseType] = useState("");
   const userData = JSON.parse(localStorage.getItem("user_data"));
   const [isFocus, setIsFocus] = useState();
+  const noref = useRef();
 
   const onClickSetExercise = async () => {
     const username = userData.username;
@@ -30,8 +34,26 @@ export default function ExerciseForm() {
     setIsFocus(isFoucs);
   };
 
+  // drag and drop 관련 기능
+  const id = props.id;
+  let left = props.left;
+  let top = props.top;
+  const [{ isDragging }, drag] = useDrag(
+    () => ({
+      type: ItemTypes.BOX,
+      item: { id, left, top },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+    }),
+    [id, left, top]
+  );
+  if (isDragging) {
+    return <div ref={drag} />;
+  }
+
   return (
-    <S.ExerciseWrapper isfocus={isFocus}>
+    <S.ExerciseWrapper ref={props.iswidget ? drag : noref} isfocus={isFocus} style={{ left, top }} iswidget={props.iswidget}>
       <S.ExerciseFormBox>
         <S.ExerciseFormText>운동 등록</S.ExerciseFormText>
         <Stack spacing={2} sx={{ width: "100%", padding: "0 10px" }}>

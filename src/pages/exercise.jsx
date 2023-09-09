@@ -8,7 +8,7 @@ export default function ExercisePage() {
     <S.RoutineLayout>
       <S.Component_grid container>
         <S.Exercise_grid item xs={6}>
-          <ExerciseForm />
+          <ExerciseForm iswidget={false} />
         </S.Exercise_grid>
         <S.Routine_grid item xs={6}>
           <RoutineForm />
