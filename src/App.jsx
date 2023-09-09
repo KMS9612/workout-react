@@ -1,14 +1,15 @@
-import "./App.css";
+import * as S from "./App.module.js";
 import Login from "./pages/login";
 
 function App() {
   return (
-    <div className="home_wrapper">
-      <div className="login_wrap">
+    <S.HomeWrapper>
+      <S.LoginWrap>
         <Login />
-      </div>
-    </div>
+      </S.LoginWrap>
+    </S.HomeWrapper>
   );
+  // }
 }
 
 export default App;

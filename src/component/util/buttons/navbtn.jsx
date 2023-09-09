@@ -1,5 +1,5 @@
-import "./navbtn.css";
+import * as S from "../../../style/components/util/buttons/navbtn.module.js";
 
 export default function NavButton(props) {
-  return <button className="nav_button">{props.buttonName}</button>;
+  return <S.NavBtn onClick={props.onClick}>{props.buttonName}</S.NavBtn>;
 }
