@@ -4,12 +4,15 @@ import api from "../../../axios/axiosInstance";
 import { useRef, useState } from "react";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "../control/ITEM_TYPE";
+import { useSetRecoilState } from "recoil";
+import { isCreate } from "../../../store/exercise";
 
 export default function ExerciseForm(props) {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseType, setExerciseType] = useState("");
   const userData = JSON.parse(localStorage.getItem("user_data"));
   const [isFocus, setIsFocus] = useState();
+  const setIsCreate = useSetRecoilState(isCreate);
   const noref = useRef();
 
   const onClickSetExercise = async () => {
@@ -23,6 +26,7 @@ export default function ExerciseForm(props) {
       const res = await api.post("/exercise/create_exercise", payload);
       setExerciseName("");
       setExerciseType("");
+      setIsCreate((prev) => !prev); // recoilState로 list렌더링 발생시키기.
     } catch (err) {
       console.log(err.message);
     }
@@ -55,7 +59,7 @@ export default function ExerciseForm(props) {
   return (
     <S.ExerciseWrapper ref={props.iswidget ? drag : noref} isfocus={isFocus} style={{ left, top }} iswidget={props.iswidget}>
       <S.ExerciseFormBox>
-        <S.ExerciseFormText>운동 등록</S.ExerciseFormText>
+        <S.ExerciseFormText>Create Exercise</S.ExerciseFormText>
         <Stack spacing={2} sx={{ width: "100%", padding: "0 10px" }}>
           <S.ExerciseInput
             variant="outlined"

@@ -1,14 +1,17 @@
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Collapse, List, ListItemButton, ListItemText, ListSubheader } from "@mui/material";
-import { useEffect, useState } from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Button, IconButton, List, ListItemButton, ListItemText, ListSubheader, Skeleton, Stack } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 import api from "../../../axios/axiosInstance";
 import { ItemTypes } from "../control/ITEM_TYPE";
 import { useDrag } from "react-dnd";
+import { useRecoilValue } from "recoil";
+import { isCreate } from "../../../store/exercise";
 
 export default function ExerciseList(props) {
-  const [open, setOpen] = useState(true);
   const [exerciseData, setExerciseData] = useState();
   const username = JSON.parse(localStorage.getItem("user_data")).username || "";
+  const isCreateValue = useRecoilValue(isCreate);
+  const noref = useRef();
 
   const getExerciseData = async () => {
     try {
@@ -24,14 +27,7 @@ export default function ExerciseList(props) {
 
   useEffect(() => {
     getExerciseData();
-  }, []);
-
-  const handleClick = (index) => {
-    setOpen((prevOpen) => ({
-      ...prevOpen,
-      [index]: !prevOpen[index],
-    }));
-  };
+  }, [isCreateValue]);
 
   // drag and drop 관련 기능
   const id = props.id;
@@ -53,33 +49,36 @@ export default function ExerciseList(props) {
 
   return (
     <List
-      ref={drag}
-      sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper", left, top, cursor: "move" }}
+      ref={props.iswidget ? drag : noref}
+      iswidget={props.iswidget}
+      sx={{ left, top, cursor: props.iswidget ? "move" : "default", border: "1px solid #ff8375", borderRadius: "5px", width: "fit-content" }}
       component="nav"
       aria-labelledby="nested-list-subheader"
       subheader={
-        <ListSubheader component="div" id="nested-list-subheader">
+        <ListSubheader component="div" id="nested-list-subheader" sx={{ backgroundColor: "#ff8375" }}>
           Exercise List
         </ListSubheader>
       }>
       {exerciseData ? (
         exerciseData.exercise.map((el, index) => (
           <>
-            <ListItemButton onClick={() => handleClick(index)}>
-              <ListItemText primary={el.exercise_type} />
-              {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={open[index]} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemText primary={el.exercise_name} />
-                </ListItemButton>
-              </List>
-            </Collapse>
+            <List component="div">
+              <ListItemButton>
+                <ListItemText primary={`${el.exercise_name} / ${el.exercise_type}`} sx={{ minWidth: "200px", maxWidth: "400px", display: "flex", justifyContent: "flex-start", alignItems: "center" }} />
+                <Button>Routine</Button>
+                <IconButton edge="end" aria-label="delete">
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemButton>
+            </List>
           </>
         ))
       ) : (
-        <div>loading</div>
+        <Stack spacing={2}>
+          <Skeleton sx={{ width: "300px" }} variant="text" />
+          <Skeleton sx={{ width: "300px" }} variant="rounded" />
+          <Skeleton sx={{ width: "300px" }} variant="rounded" />
+        </Stack>
       )}
     </List>
   );

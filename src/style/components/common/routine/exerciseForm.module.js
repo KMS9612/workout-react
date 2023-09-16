@@ -8,7 +8,7 @@ export const ExerciseWrapper = styled(Box)`
   justify-content: flex-start;
   align-items: center;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 5px;
   overflow: hidden;
   padding-bottom: 20px;
   opacity: ${(props) => (props.isfocus === "true" ? "100%" : "50%")};
@@ -30,16 +30,16 @@ export const ExerciseInput = styled(TextField)`
 `;
 export const ExerciseFormText = styled(Typography)`
   width: 100%;
-  height: 70px;
+  height: 50px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 0.875rem;
+  font-weight: 400;
   font-family: Roboto;
   border-bottom: 1px solid #ccc;
   margin-bottom: 20px;
   background-color: #ff8375;
   padding-left: 20px;
-  color: #fff;
+  color: rgba(0, 0, 0, 0.6);
 `;

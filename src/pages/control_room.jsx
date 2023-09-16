@@ -10,8 +10,8 @@ import ExerciseList from "../component/common/routine/exerciseList";
 export default function ControlRoom() {
   // 공식 홈페이지 코드.
   const [boxes, setBoxes] = useState({
-    a: { top: 180, left: 20, component: "ExerciseForm" },
-    b: { top: 180, left: 20, component: "ExerciseList" },
+    a: { top: 180, left: 20, component: "ExerciseForm", isOpen: false },
+    b: { top: 180, left: 20, component: "ExerciseList", isOpen: false },
   });
   const components = {
     ExerciseForm: ExerciseForm,
@@ -45,15 +45,30 @@ export default function ControlRoom() {
     [moveBox]
   );
 
-  console.log(typeof components["ExerciseForm"]);
-
   return (
     <S.Wrapper ref={drop}>
-      <WidgetFinder id={"widget_finder_1"} initialPosition={{ top: 0, left: 0 }} />
+      <WidgetFinder
+        id={"widget_finder_1"}
+        initialPosition={{ top: 0, left: 0 }}
+        widgetData={boxes}
+        setBoxes={setBoxes}
+      />
       {Object.keys(boxes).map((key) => {
-        const { left, top, component } = boxes[key];
+        const { left, top, component, isOpen } = boxes[key];
         const ComponentToRender = components[component];
-        return <ComponentToRender key={key} id={key} left={left} top={top} iswidget={true}></ComponentToRender>;
+        if (isOpen) {
+          return (
+            <ComponentToRender
+              key={key}
+              id={key}
+              left={left}
+              top={top}
+              iswidget={true}
+            ></ComponentToRender>
+          );
+        } else {
+          return <></>;
+        }
       })}
     </S.Wrapper>
   );
