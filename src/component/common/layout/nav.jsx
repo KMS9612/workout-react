@@ -17,6 +17,7 @@ export default function Navigation(props) {
     { to: "/exercise", buttonName: "루틴관리", width: "100%", pBottom: "0" },
     { to: "/dice", buttonName: "타이머", width: "100%", pBottom: "0" },
     { to: "/community", buttonName: "커뮤니티", width: "100%", pBottom: "0" },
+    { to: "/control", buttonName: "컨트롤 룸", width: "100%", pBottom: "0" },
   ];
 
   const toggleDrawer = (anchor, open) => (event) => {
