@@ -5,16 +5,11 @@ import * as S from "../style/page/routine.module";
 
 export default function ExercisePage() {
   return (
-    <S.RoutineLayout>
-      <S.Component_grid container>
-        <S.Exercise_grid item xs={6}>
-          <ExerciseForm iswidget={false} />
-        </S.Exercise_grid>
-        <S.Routine_grid item xs={6}>
-          <RoutineForm />
-        </S.Routine_grid>
+    <S.RoutineLayout container spacing={4}>
+      <S.Component_grid item xs={4}>
+        <ExerciseForm iswidget={false} />
       </S.Component_grid>
-      <S.Component_grid>
+      <S.Component_grid item xs={8}>
         <ExerciseList />
       </S.Component_grid>
     </S.RoutineLayout>

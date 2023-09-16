@@ -12,7 +12,8 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ["Black Han Sans", "sans-serif"].join(","),
+    fontFamily: ["Roboto", "sans-serif"].join(","),
+    fontWeight: 700,
     // fontFamily: ["Black Hans Sans", "-apple-system", "BlinkMacSystemFont", '"Segoe UI"', "Roboto", '"Helvetica Neue"', "Arial", "sans-serif", '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"'].join(","),
   },
 });
