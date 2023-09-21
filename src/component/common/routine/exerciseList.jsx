@@ -1,16 +1,18 @@
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Button, IconButton, List, ListItemButton, ListItemText, ListSubheader, Skeleton, Stack } from "@mui/material";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import EditIcon from "@mui/icons-material/Edit";
+import { IconButton, List, ListItemButton, ListItemText, ListSubheader, Skeleton, Stack } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import api from "../../../axios/axiosInstance";
 import { ItemTypes } from "../control/ITEM_TYPE";
 import { useDrag } from "react-dnd";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { isCreate } from "../../../store/exercise";
 
 export default function ExerciseList(props) {
   const [exerciseData, setExerciseData] = useState();
+  const [isCreateValue, setIsCreateValue] = useRecoilState(isCreate);
   const username = JSON.parse(localStorage.getItem("user_data")).username || "";
-  const isCreateValue = useRecoilValue(isCreate);
   const noref = useRef();
 
   const getExerciseData = async () => {
@@ -22,6 +24,31 @@ export default function ExerciseList(props) {
       setExerciseData(res.data.exercise);
     } catch (err) {
       console.log(err, "exerciseList 요청에러");
+    }
+  };
+
+  const onClickDeleteExercise = async (el) => {
+    try {
+      let payload = {
+        username: username,
+        exercise_name: el.exercise_name,
+      };
+      console.log(el.exercise_name);
+      await api.delete("/exercise/delete_exercise_by_name", { params: payload });
+      setExerciseData("");
+      setIsCreateValue((prev) => !prev);
+    } catch {
+      // 모달이나 다이얼로그로 변경하기
+      console.log("운동삭제에 실패했습니다.");
+    }
+  };
+
+  const onClickDeleteAllExercise = async () => {
+    try {
+      const res = await api.delete("/exercise/delete_exercise_all");
+    } catch {
+      // 모달이나 다이얼로그로 변경하기
+      console.log("운동기록 전체 삭제에 실패했습니다");
     }
   };
 
@@ -51,7 +78,7 @@ export default function ExerciseList(props) {
     <List
       ref={props.iswidget ? drag : noref}
       iswidget={props.iswidget}
-      sx={{ left, top, cursor: props.iswidget ? "move" : "default", border: "1px solid #ff8375", borderRadius: "5px", width: "fit-content" }}
+      sx={{ left, top, cursor: props.iswidget ? "move" : "default", border: "1px solid #ff8375", borderRadius: "5px", width: props.iswidget ? "fit-content" : "100%", height: props.iswidget ? "500px" : "100%", overflow: "auto" }}
       component="nav"
       aria-labelledby="nested-list-subheader"
       subheader={
@@ -64,10 +91,15 @@ export default function ExerciseList(props) {
           <>
             <List component="div">
               <ListItemButton>
-                <ListItemText primary={`${el.exercise_name} / ${el.exercise_type}`} sx={{ minWidth: "200px", maxWidth: "400px", display: "flex", justifyContent: "flex-start", alignItems: "center" }} />
-                <Button>Routine</Button>
+                <ListItemText primary={`${el.exercise_name} / ${el.exercise_type}`} sx={{ minWidth: "200px", display: "flex", justifyContent: "flex-start", alignItems: "center" }} />
+                <IconButton edge="end" sx={{ marginRight: "5px" }}>
+                  <EditIcon />
+                </IconButton>
+                <IconButton edge="end" sx={{ marginRight: "5px" }}>
+                  <PlaylistAddIcon />
+                </IconButton>
                 <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon />
+                  <DeleteIcon onClick={() => onClickDeleteExercise(el)} />
                 </IconButton>
               </ListItemButton>
             </List>
@@ -75,9 +107,10 @@ export default function ExerciseList(props) {
         ))
       ) : (
         <Stack spacing={2}>
-          <Skeleton sx={{ width: "300px" }} variant="text" />
-          <Skeleton sx={{ width: "300px" }} variant="rounded" />
-          <Skeleton sx={{ width: "300px" }} variant="rounded" />
+          <Skeleton sx={{ width: props.iswidget ? "300px" : "100%", height: "50px" }} variant="text" />
+          <Skeleton sx={{ width: props.iswidget ? "300px" : "100%", height: "50px" }} variant="rounded" />
+          <Skeleton sx={{ width: props.iswidget ? "300px" : "100%", height: "50px" }} variant="rounded" />
+          <Skeleton sx={{ width: props.iswidget ? "300px" : "100%", height: "50px" }} variant="rounded" />
         </Stack>
       )}
     </List>

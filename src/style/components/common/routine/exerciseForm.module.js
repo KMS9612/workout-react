@@ -3,6 +3,7 @@ import { Box, TextField, Typography } from "@mui/material";
 
 export const ExerciseWrapper = styled(Box)`
   width: ${(props) => (props.iswidget ? "30%" : "100%")};
+  height: ${(props) => (props.iswidget ? "" : "100%")};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

@@ -10,4 +10,6 @@ export const RoutineLayout = styled(Grid)`
   padding: 20px;
 `;
 
-export const Component_grid = styled(Grid)``;
+export const Component_grid = styled(Grid)`
+  height: 100%;
+`;
