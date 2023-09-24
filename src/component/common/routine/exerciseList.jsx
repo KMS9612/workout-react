@@ -33,7 +33,6 @@ export default function ExerciseList(props) {
         username: username,
         exercise_name: el.exercise_name,
       };
-      console.log(el.exercise_name);
       await api.delete("/exercise/delete_exercise_by_name", { params: payload });
       setExerciseData("");
       setIsCreateValue((prev) => !prev);
@@ -105,6 +104,11 @@ export default function ExerciseList(props) {
             </List>
           </>
         ))
+      ) : exerciseData == null ? (
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", fontWeight: 700 }}>
+          운동 데이터가 없습니다!
+          <br /> 운동을 생성해주세요
+        </div>
       ) : (
         <Stack spacing={2}>
           <Skeleton sx={{ width: props.iswidget ? "300px" : "100%", height: "50px" }} variant="text" />

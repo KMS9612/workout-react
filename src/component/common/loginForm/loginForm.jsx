@@ -4,6 +4,8 @@ import FormInput from "../../util/inputs/formInput";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginAlert from "../../util/modals/login_alert.jsx";
+import { PromotionURL, TestURL } from "../../../axios/axiosInstance.js";
+import Cookie from "js-cookie";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -35,7 +37,8 @@ export default function LoginForm() {
     setButtonLoading(true);
     await axios({
       method: "post",
-      url: "https://workout-back-3e9090b4fd41.herokuapp.com/login",
+      // url: TestURL + "/login", // Test API
+      url: PromotionURL + "/login", // Promotion API
       data: {
         email,
         password,
@@ -44,14 +47,9 @@ export default function LoginForm() {
       .then((res) => {
         handleModal(true, "로그인에 성공했습니다", "Workout!");
         const userData = res.data;
-        localStorage.setItem(
-          "workoutToken",
-          JSON.stringify(res.data.accessToken)
-        );
-        localStorage.setItem(
-          "workoutRefreshToken",
-          JSON.stringify(res.data.refreshToken)
-        );
+        localStorage.setItem("workoutToken", JSON.stringify(res.data.accessToken));
+        localStorage.setItem("workoutRefreshToken", JSON.stringify(res.data.refreshToken));
+        Cookie.set("uid", userData.uid);
         localStorage.setItem("user_data", JSON.stringify(userData));
         router("/dashboard");
       })
@@ -67,12 +65,7 @@ export default function LoginForm() {
   return (
     <S.LoginForm>
       {/* Modal */}
-      <LoginAlert
-        modalOpen={modalOpen}
-        handleModal={handleModal}
-        modalTitle={modalTitle}
-        modalMessage={modalMessage}
-      />
+      <LoginAlert modalOpen={modalOpen} handleModal={handleModal} modalTitle={modalTitle} modalMessage={modalMessage} />
       {/* Modal 종료 */}
       {/* 웨이브 bg 시작 */}
       <S.Left_login>
@@ -89,19 +82,10 @@ export default function LoginForm() {
         {/* <LoginInput isEmail={isEmail} checkEmail={checkEmail} /> */}
         <S.InputStack spacing={4}>
           <FormInput type="email" PH="Email" setEmail={setEmail} />
-          <FormInput
-            type="password"
-            PH="Password"
-            setPassword={setPassword}
-            onClickLogin={onClickLogin}
-          />
+          <FormInput type="password" PH="Password" setPassword={setPassword} onClickLogin={onClickLogin} />
         </S.InputStack>
         <S.BtnStack spacing={2}>
-          <S.LoginBtn
-            loading={buttonLoading}
-            variant="contained"
-            onClick={onClickLogin}
-          >
+          <S.LoginBtn loading={buttonLoading} variant="contained" onClick={onClickLogin}>
             로그인
           </S.LoginBtn>
           <S.SignUpBtn variant="outlined" onClick={onClickRoute}>

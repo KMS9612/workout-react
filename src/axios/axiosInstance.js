@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const TestURL = "http://localhost:8080";
-const PromotionURL = "https://workout-back-3e9090b4fd41.herokuapp.com/"; // API배포시 url
+export const TestURL = "http://localhost:8080";
+export const PromotionURL = "https://workout-back-3e9090b4fd41.herokuapp.com"; // API배포시 url
 
 // refreshAccessToken 로직
 const refreshAccessToken = async (refreshToken) => {
@@ -9,7 +9,6 @@ const refreshAccessToken = async (refreshToken) => {
     refreshToken: refreshToken,
   });
   const accessToken = response.data.newAccessToken;
-  console.log("rework", accessToken);
 
   localStorage.setItem("workoutToken", JSON.stringify(accessToken));
 
@@ -17,7 +16,7 @@ const refreshAccessToken = async (refreshToken) => {
 };
 
 // 모든 요청을 api.* (ex.api.post("/endpoint"))으로 사용해 interceptors를 활용한다.
-const api = axios.create({ baseURL: PromotionURL });
+const api = axios.create({ baseURL: PromotionURL, withCredentials: true });
 
 // 요청 인터셉트
 api.interceptors.request.use(
@@ -53,9 +52,7 @@ api.interceptors.response.use(
       // 첫 요청에 위 if문을 통과했다면 재요청을 하기위해 originalRequest._retry를 추가하여 중복 재요청 방지
       originalRequest._retry = true;
 
-      const refreshToken = JSON.parse(
-        localStorage.getItem("workoutRefreshToken")
-      );
+      const refreshToken = JSON.parse(localStorage.getItem("workoutRefreshToken"));
 
       try {
         const accessToken = await refreshAccessToken(refreshToken);
