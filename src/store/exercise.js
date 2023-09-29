@@ -2,5 +2,5 @@ import { atom } from "recoil";
 
 export const isCreate = atom({
   key: "isCreate",
-  default: false,
+  default: Boolean,
 });
