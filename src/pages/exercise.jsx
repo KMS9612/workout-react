@@ -1,6 +1,5 @@
 import ExerciseForm from "../component/common/routine/exerciseForm";
 import ExerciseList from "../component/common/routine/exerciseList";
-import RoutineForm from "../component/common/routine/routineForm";
 import * as S from "../style/page/routine.module";
 
 export default function ExercisePage() {

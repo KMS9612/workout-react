@@ -14,7 +14,8 @@ export default function Navigation(props) {
   const navigate = useNavigate();
 
   const navItems = [
-    { to: "/exercise", buttonName: "루틴관리", width: "100%", pBottom: "0" },
+    { to: "/exercise", buttonName: "운동관리", width: "100%", pBottom: "0" },
+    { to: "/routine", buttonName: "루틴관리", width: "100%", pBottom: "0" },
     { to: "/dice", buttonName: "타이머", width: "100%", pBottom: "0" },
     { to: "/community", buttonName: "커뮤니티", width: "100%", pBottom: "0" },
     { to: "/control", buttonName: "컨트롤 룸", width: "100%", pBottom: "0" },
@@ -22,10 +23,7 @@ export default function Navigation(props) {
 
   const toggleDrawer = (anchor, open) => (event) => {
     props.onMouseLeave();
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
       return;
     }
 
@@ -41,20 +39,13 @@ export default function Navigation(props) {
           width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
         }}
         role="dialog"
-        onClick={toggleDrawer(anchor, false)}
-      >
+        onClick={toggleDrawer(anchor, false)}>
         <div style={{ marginBottom: "50px" }}>
-          <S.Header1 onClick={() => onClickNavigate("/dashboard")}>
-            Workout
-          </S.Header1>
+          <S.Header1 onClick={() => onClickNavigate("/dashboard")}>Workout</S.Header1>
         </div>
         <S.ItemWrap>
           {navItems.map((el, index) => (
-            <NavButton
-              key={`${el.buttonName}-${new Date().getTime()}-${index}`}
-              buttonName={el.buttonName}
-              onClick={() => onClickNavigate(el.to)}
-            ></NavButton>
+            <NavButton key={`${el.buttonName}-${new Date().getTime()}-${index}`} buttonName={el.buttonName} onClick={() => onClickNavigate(el.to)}></NavButton>
           ))}
         </S.ItemWrap>
       </Box>
@@ -65,14 +56,8 @@ export default function Navigation(props) {
     <S.NavWrapper isOver={props.isOver}>
       {["left", "right", "top", "bottom"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <S.HideNavButtons onClick={toggleDrawer(anchor, true)}>
-            {anchor}
-          </S.HideNavButtons>
-          <S.NavDrawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
+          <S.HideNavButtons onClick={toggleDrawer(anchor, true)}>{anchor}</S.HideNavButtons>
+          <S.NavDrawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
             {navList(anchor)}
           </S.NavDrawer>
         </React.Fragment>

@@ -6,10 +6,13 @@ import { useDrag } from "react-dnd";
 import { ItemTypes } from "../control/ITEM_TYPE";
 import { useSetRecoilState } from "recoil";
 import { isCreate } from "../../../store/exercise";
+import ErrorDialog from "../../util/modals/error_dialog";
 
 export default function ExerciseForm(props) {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseType, setExerciseType] = useState("");
+  const [isOpenErr, setIsOpenErr] = useState(false);
+  const [err_msg, setErrMsg] = useState(false);
   const userData = JSON.parse(localStorage.getItem("user_data"));
   const [isFocus, setIsFocus] = useState();
   const setIsCreate = useSetRecoilState(isCreate);
@@ -17,6 +20,11 @@ export default function ExerciseForm(props) {
 
   const onClickSetExercise = async () => {
     const username = userData.username;
+    if (!exerciseName || !exerciseType) {
+      setIsOpenErr(true);
+      setErrMsg("운동이름, 운동타입을 모두 입력해주세요");
+      return;
+    }
     // post 바디에 들어갈 객체
     let payload = {
       username: username,
@@ -28,7 +36,8 @@ export default function ExerciseForm(props) {
       setExerciseType("");
       setIsCreate((prev) => !prev); // recoilState로 list렌더링 발생시키기.
     } catch (err) {
-      console.log(err.message);
+      setIsOpenErr(true);
+      setErrMsg("운동등록에 실패했습니다.");
     }
   };
 
@@ -58,6 +67,7 @@ export default function ExerciseForm(props) {
 
   return (
     <S.ExerciseWrapper ref={props.iswidget ? drag : noref} isfocus={isFocus} style={{ left, top }} iswidget={props.iswidget}>
+      <ErrorDialog setIsOpen={setIsOpenErr} isOpen={isOpenErr} err_msg={err_msg} />
       <S.ExerciseFormBox>
         <S.ExerciseFormText>Create Exercise</S.ExerciseFormText>
         <Stack spacing={2} sx={{ width: "100%", padding: "0 10px" }}>

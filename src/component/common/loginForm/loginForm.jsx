@@ -37,8 +37,8 @@ export default function LoginForm() {
     setButtonLoading(true);
     await axios({
       method: "post",
-      // url: TestURL + "/login", // Test API
-      url: PromotionURL + "/login", // Promotion API
+      url: TestURL + "/login", // Test API
+      // url: PromotionURL + "/login", // Promotion API
       data: {
         email,
         password,
