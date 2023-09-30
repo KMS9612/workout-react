@@ -1,11 +1,11 @@
 import axios from "axios";
 import * as S from "../../../style/components/common/loginForm/loginForm.module.js";
-import FormInput from "../../util/inputs/formInput";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginAlert from "../../util/modals/login_alert.jsx";
 import { PromotionURL, TestURL } from "../../../axios/axiosInstance.js";
 import Cookie from "js-cookie";
+import { TextField } from "@mui/material";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -14,7 +14,20 @@ export default function LoginForm() {
   const [modalMessage, setModalMessage] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
-  const loginFailMessage = "로그인에 실패했습니다.";
+  const loginFailMessage = "Error!";
+  const router = useNavigate();
+
+  const onChangeSaveVal = (e) => {
+    let status = e.currentTarget.type; // data-status 정보를 담는 변수
+    let targetValue = e.currentTarget.value;
+
+    if (status === "email") {
+      setEmail(targetValue);
+    }
+    if (status === "password") {
+      setPassword(targetValue);
+    }
+  };
 
   const handleModal = (isOpen, title, message) => {
     setModalTitle(title);
@@ -27,7 +40,6 @@ export default function LoginForm() {
       setModalOpen(false);
     }
   };
-  const router = useNavigate();
 
   const onClickLogin = async () => {
     if (!email || !password) {
@@ -62,6 +74,12 @@ export default function LoginForm() {
     router("/signup");
   };
 
+  const isEnter = (e) => {
+    if (e.key === "Enter") {
+      onClickLogin();
+    }
+  };
+
   return (
     <S.LoginForm>
       {/* Modal */}
@@ -80,18 +98,18 @@ export default function LoginForm() {
       <S.Right_login>
         <S.LoginFormHeader>로그인</S.LoginFormHeader>
         {/* <LoginInput isEmail={isEmail} checkEmail={checkEmail} /> */}
-        <S.InputStack spacing={4}>
-          <FormInput type="email" PH="Email" setEmail={setEmail} />
-          <FormInput type="password" PH="Password" setPassword={setPassword} onClickLogin={onClickLogin} />
+        <S.InputStack spacing={2}>
+          <TextField onKeyDown={isEnter} onChange={onChangeSaveVal} type="email" label="Email" />
+          <TextField onKeyDown={isEnter} onChange={onChangeSaveVal} type="password" label="Password" />
+          <S.BtnStack spacing={2}>
+            <S.LoginBtn loading={buttonLoading} variant="contained" onClick={onClickLogin}>
+              로그인
+            </S.LoginBtn>
+            <S.SignUpBtn variant="outlined" onClick={onClickRoute}>
+              회원가입
+            </S.SignUpBtn>
+          </S.BtnStack>
         </S.InputStack>
-        <S.BtnStack spacing={2}>
-          <S.LoginBtn loading={buttonLoading} variant="contained" onClick={onClickLogin}>
-            로그인
-          </S.LoginBtn>
-          <S.SignUpBtn variant="outlined" onClick={onClickRoute}>
-            회원가입
-          </S.SignUpBtn>
-        </S.BtnStack>
       </S.Right_login>
       {/* 로그인 폼 종료 */}
     </S.LoginForm>

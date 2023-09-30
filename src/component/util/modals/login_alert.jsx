@@ -3,7 +3,6 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import Typography from "@mui/material/Typography";
 import * as S from "../../../style/components/util/modals/login_alert.moduel";
 
 const style = {
@@ -14,7 +13,6 @@ const style = {
   width: 600,
   height: 200,
   bgcolor: "background.paper",
-  border: "2px solid #ff8375",
   borderRadius: 5,
   boxShadow: 24,
   p: 4,
@@ -37,7 +35,7 @@ export default function LoginAlert(props) {
         }}>
         <Fade in={props.modalOpen}>
           <Box sx={style}>
-            <S.LoginAlertTitle id="transition-modal-title" variant="h6" component="h2">
+            <S.LoginAlertTitle id="transition-modal-title" variant="h6" component="h5">
               {props.modalTitle}
             </S.LoginAlertTitle>
             <S.LoginAlertMessage id="transition-modal-description" sx={{ mt: 2 }}>
