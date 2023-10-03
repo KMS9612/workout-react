@@ -2,14 +2,16 @@ import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 
 export const RoutineWrapper = styled(Box)`
-  width: 100%;
-  height: 100%;
+  width: ${(props) => (props.iswidget ? "300px" : "100%")};
+  position: ${(props) => (props.iswidget ? "absolute" : "block")};
+  height: ${(props) => (props.iswidget ? "200px" : "100%")};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   border: 1px solid #ff8376;
   border-radius: 5px;
+  cursor: ${(props) => (props.iswidget ? "move" : "default")};
 `;
 
 export const RoutineTitle = styled(Typography)`

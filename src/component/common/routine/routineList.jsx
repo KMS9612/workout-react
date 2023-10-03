@@ -1,17 +1,20 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { Button, IconButton, List, ListItemButton, ListItemText, ListSubheader, Skeleton, Stack } from "@mui/material";
-import { useEffect, useState } from "react";
+import { IconButton, List, ListItemButton, ListItemText, ListSubheader, Skeleton, Stack } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 import api from "../../../axios/axiosInstance";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { isCreateRoutine } from "../../../store/routine";
 import ErrorDialog from "../../util/modals/error_dialog";
+import { useDrag } from "react-dnd";
+import { ItemTypes } from "../control/ITEM_TYPE";
 
-export default function RoutineList() {
+export default function RoutineList(props) {
   const [routineList, setRoutineList] = useState([]);
   const [isUpdate, setIsUpdateRoutine] = useRecoilState(isCreateRoutine);
   const [isError, setIsError] = useState(false);
   const [err_msg, setErr_msg] = useState("");
+  const noref = useRef();
 
   const getRoutineData = async () => {
     await api
@@ -59,10 +62,37 @@ export default function RoutineList() {
         setErr_msg(err.response.data.message);
       });
   };
-
+  // dnd 기능 관련 로직
+  const id = props.id;
+  let left = props.left;
+  let top = props.top;
+  const [{ isDragging }, drag] = useDrag(
+    () => ({
+      type: ItemTypes.BOX,
+      item: { id, left, top },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+    }),
+    [id, left, top]
+  );
+  if (isDragging) {
+    return <div ref={drag} />;
+  }
   return (
     <List
-      sx={{ border: "1px solid #ff8375", borderRadius: "5px", width: "100%", height: "100%", overflow: "auto" }}
+      ref={props.iswidget ? drag : noref}
+      sx={{
+        border: "1px solid #ff8375",
+        borderRadius: "5px",
+        width: props.iswidget ? 400 : "100%",
+        height: props.iswidget ? 300 : "100%",
+        overflowX: "hidden",
+        position: props.iswidget ? "absolute" : "block",
+        left,
+        top,
+        cursor: props.iswidget ? "move" : "default",
+      }}
       subheader={
         <ListSubheader component="div" sx={{ backgroundColor: "#ff8375" }}>
           Routine List
