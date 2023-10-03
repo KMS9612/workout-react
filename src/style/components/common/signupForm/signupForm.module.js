@@ -80,7 +80,6 @@ export const SignUpFormHeader = styled.h2`
 
 export const InputStack = styled(Stack)`
   width: 100%;
-  height: 250px;
 `;
 
 export const BtnStack = styled(Stack)`

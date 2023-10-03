@@ -6,16 +6,22 @@ import update from "immutability-helper";
 import { ItemTypes } from "../component/common/control/ITEM_TYPE";
 import ExerciseForm from "../component/common/routine/exerciseForm";
 import ExerciseList from "../component/common/routine/exerciseList";
+import RoutineForm from "../component/common/routine/routineForm";
+import RoutineList from "../component/common/routine/routineList";
 
 export default function ControlRoom() {
   // 공식 홈페이지 코드.
   const [boxes, setBoxes] = useState({
     a: { top: 180, left: 20, component: "ExerciseForm", isOpen: false },
     b: { top: 180, left: 20, component: "ExerciseList", isOpen: false },
+    c: { top: 180, left: 20, component: "RoutineForm", isOpen: false },
+    d: { top: 180, left: 20, component: "RoutineList", isOpen: false },
   });
   const components = {
     ExerciseForm: ExerciseForm,
     ExerciseList: ExerciseList,
+    RoutineForm: RoutineForm,
+    RoutineList: RoutineList,
   };
 
   const moveBox = useCallback(
@@ -47,25 +53,12 @@ export default function ControlRoom() {
 
   return (
     <S.Wrapper ref={drop}>
-      <WidgetFinder
-        id={"widget_finder_1"}
-        initialPosition={{ top: 0, left: 0 }}
-        widgetData={boxes}
-        setBoxes={setBoxes}
-      />
+      <WidgetFinder id={"widget_finder_1"} initialPosition={{ top: 0, left: 0 }} widgetData={boxes} setBoxes={setBoxes} />
       {Object.keys(boxes).map((key) => {
         const { left, top, component, isOpen } = boxes[key];
         const ComponentToRender = components[component];
         if (isOpen) {
-          return (
-            <ComponentToRender
-              key={key}
-              id={key}
-              left={left}
-              top={top}
-              iswidget={true}
-            ></ComponentToRender>
-          );
+          return <ComponentToRender key={key} id={key} left={left} top={top} iswidget={true}></ComponentToRender>;
         } else {
           return <></>;
         }

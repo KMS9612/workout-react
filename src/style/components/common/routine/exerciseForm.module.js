@@ -13,7 +13,7 @@ export const ExerciseWrapper = styled(Box)`
   overflow: hidden;
   padding-bottom: 20px;
   opacity: ${(props) => (props.isfocus === "true" ? "100%" : "50%")};
-  position: ${(props) => (props.iswidget ? "absolute" : "blcok")};
+  position: ${(props) => (props.iswidget ? "absolute" : "block")};
   cursor: ${(props) => (props.iswidget ? "move" : "default")};
 `;
 
