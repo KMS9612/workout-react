@@ -20,7 +20,7 @@ export const NavWrapper = styled.div`
 `;
 
 export const Header1 = styled.h1`
-  color: #000;
+  color: #ff8375;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,6 +33,7 @@ export const ItemWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
   transition: all 300ms;
 `;
 

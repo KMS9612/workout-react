@@ -20,7 +20,6 @@ import ControlRoom from "./pages/control_room";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { RecoilRoot } from "recoil";
-import RoutinePage from "./pages/routine";
 
 // Community 컴포넌트 lazy로딩을 위한 상수
 const Community = lazy(() => import("./pages/community"));
@@ -43,7 +42,6 @@ root.render(
                 <Routes>
                   <Route path="/" element={<App />} />
                   <Route path="/exercise" element={<ExercisePage />} />
-                  <Route path="/routine" element={<RoutinePage />} />
                   <Route path="/dice" element={<DicePage />} />
                   <Route path="/signup" element={<SignUp />} />
                   <Route path="/community" element={<Community />} />

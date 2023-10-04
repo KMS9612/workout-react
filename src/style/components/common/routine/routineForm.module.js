@@ -1,10 +1,13 @@
 import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 
-export const RoutineWrapper = styled(Box)`
+export const RoutineWrapper = styled(Box, {
+  shouldForwardProp: (prop) => !["iswidget"].includes(prop),
+  // Boolean타입 Emotion Props가 Dom 요소까지 전달되서 에러메세지가 출력됬음, 해당 문제에 대한 해결책
+})`
   width: ${(props) => (props.iswidget ? "300px" : "100%")};
   position: ${(props) => (props.iswidget ? "absolute" : "block")};
-  height: ${(props) => (props.iswidget ? "200px" : "100%")};
+  height: ${(props) => (props.iswidget ? "" : "275px")};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

@@ -1,6 +1,5 @@
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import { IconButton, List, ListItemButton, ListItemText, ListSubheader, Skeleton, Stack } from "@mui/material";
+import { List, ListSubheader, Skeleton, Stack } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import api from "../../../axios/axiosInstance";
 import { useRecoilState } from "recoil";
@@ -8,12 +7,13 @@ import { isCreateRoutine } from "../../../store/routine";
 import ErrorDialog from "../../util/modals/error_dialog";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "../control/ITEM_TYPE";
+import RoutineListDetail from "./routineListDetail";
 
 export default function RoutineList(props) {
   const [routineList, setRoutineList] = useState([]);
-  const [isUpdate, setIsUpdateRoutine] = useRecoilState(isCreateRoutine);
   const [isError, setIsError] = useState(false);
   const [err_msg, setErr_msg] = useState("");
+  const [isUpdate, setIsUpdateRoutine] = useRecoilState(isCreateRoutine);
   const noref = useRef();
 
   const getRoutineData = async () => {
@@ -31,23 +31,6 @@ export default function RoutineList(props) {
     getRoutineData();
   }, [isUpdate]);
 
-  const onClickFetchRoutine = async (el) => {
-    const payload = { routine_title: el.routine_title };
-    await api.get("/routine/fetch_routine", { params: payload });
-  };
-
-  const deleteAllRoutine = async () => {
-    await api
-      .delete("/routine/delete_routines")
-      .then(() => {
-        setIsUpdateRoutine((prev) => !prev);
-      })
-      .catch((err) => {
-        setIsError(true);
-        setErr_msg(err.response.data.message);
-      });
-  };
-
   const deleteRoutine = async (el) => {
     const payload = {
       routine_title: el.routine_title,
@@ -62,6 +45,19 @@ export default function RoutineList(props) {
         setErr_msg(err.response.data.message);
       });
   };
+
+  const deleteAllRoutine = async () => {
+    await api
+      .delete("/routine/delete_routines")
+      .then(() => {
+        setIsUpdateRoutine((prev) => !prev);
+      })
+      .catch((err) => {
+        setIsError(true);
+        setErr_msg(err.response.data.message);
+      });
+  };
+
   // dnd 기능 관련 로직
   const id = props.id;
   let left = props.left;
@@ -94,26 +90,14 @@ export default function RoutineList(props) {
         cursor: props.iswidget ? "move" : "default",
       }}
       subheader={
-        <ListSubheader component="div" sx={{ backgroundColor: "#ff8375" }}>
+        <ListSubheader component="div" sx={{ backgroundColor: "#ff8375", display: "flex", alignItems: "center" }}>
           Routine List
-          <DeleteIcon onClick={deleteAllRoutine} />
+          <DeleteIcon onClick={deleteAllRoutine} sx={{ cursor: "pointer" }} />
         </ListSubheader>
       }>
       <ErrorDialog setIsOpen={setIsError} isOpen={isError} err_msg={err_msg} />
       {routineList.length > 0 ? (
-        routineList.map((el) => (
-          <List component="div" onClick={() => onClickFetchRoutine(el)}>
-            <ListItemButton>
-              <ListItemText primary={el.routine_title} sx={{ minWidth: "200px", display: "flex", justifyContent: "flex-start", alignItems: "center" }} />
-              <IconButton edge="end" sx={{ marginRight: "5px" }}>
-                <EditIcon />
-              </IconButton>
-              <IconButton edge="end" aria-label="delete">
-                <DeleteIcon onClick={() => deleteRoutine(el)} />
-              </IconButton>
-            </ListItemButton>
-          </List>
-        ))
+        routineList.map((el, index) => <RoutineListDetail key={el._id} el={el} deleteRoutine={deleteRoutine} />)
       ) : (
         <Stack spacing={2}>
           <Skeleton sx={{ width: "100%", height: "50px" }} variant="text" />

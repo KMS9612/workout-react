@@ -87,22 +87,20 @@ export default function ExerciseList(props) {
       }>
       {exerciseData ? (
         exerciseData.exercise.map((el, index) => (
-          <>
-            <List component="div">
-              <ListItemButton>
-                <ListItemText primary={`${el.exercise_name} / ${el.exercise_type}`} sx={{ minWidth: "200px", display: "flex", justifyContent: "flex-start", alignItems: "center" }} />
-                <IconButton edge="end" sx={{ marginRight: "5px" }}>
-                  <EditIcon />
-                </IconButton>
-                <IconButton edge="end" sx={{ marginRight: "5px" }}>
-                  <PlaylistAddIcon />
-                </IconButton>
-                <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon onClick={() => onClickDeleteExercise(el)} />
-                </IconButton>
-              </ListItemButton>
-            </List>
-          </>
+          <List component="div" key={el._id}>
+            <ListItemButton>
+              <ListItemText primary={`${el.exercise_name} / ${el.exercise_type}`} sx={{ minWidth: "200px", display: "flex", justifyContent: "flex-start", alignItems: "center" }} />
+              <IconButton edge="end" sx={{ marginRight: "5px" }}>
+                <EditIcon />
+              </IconButton>
+              <IconButton edge="end" sx={{ marginRight: "5px" }}>
+                <PlaylistAddIcon />
+              </IconButton>
+              <IconButton edge="end" aria-label="delete" onClick={() => onClickDeleteExercise(el)}>
+                <DeleteIcon />
+              </IconButton>
+            </ListItemButton>
+          </List>
         ))
       ) : (
         <Stack spacing={2}>

@@ -1,15 +1,14 @@
 import styled from "@emotion/styled";
 
 export const NavBtn = styled.div`
-  width: 100%;
+  width: 95%;
   height: 45px;
   margin-bottom: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid #ff8375;
-  border-right: 0;
-  border-left: 0;
+  border-radius: 15px;
   background-color: #fff;
   color: #ff8375;
   font-size: 14px;

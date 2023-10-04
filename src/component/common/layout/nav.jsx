@@ -15,7 +15,6 @@ export default function Navigation(props) {
 
   const navItems = [
     { to: "/exercise", buttonName: "운동관리", width: "100%", pBottom: "0" },
-    { to: "/routine", buttonName: "루틴관리", width: "100%", pBottom: "0" },
     { to: "/dice", buttonName: "타이머", width: "100%", pBottom: "0" },
     { to: "/community", buttonName: "커뮤니티", width: "100%", pBottom: "0" },
     { to: "/control", buttonName: "컨트롤 룸", width: "100%", pBottom: "0" },
@@ -40,7 +39,7 @@ export default function Navigation(props) {
         }}
         role="dialog"
         onClick={toggleDrawer(anchor, false)}>
-        <div style={{ marginBottom: "50px" }}>
+        <div style={{ marginBottom: "50px", borderBottom: "1px solid #ccc" }}>
           <S.Header1 onClick={() => onClickNavigate("/dashboard")}>Workout</S.Header1>
         </div>
         <S.ItemWrap>

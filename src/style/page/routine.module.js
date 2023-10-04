@@ -6,10 +6,8 @@ export const RoutineLayout = styled(Grid)`
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 20px;
 `;
 
-export const Component_grid = styled(Grid)`
-  height: 100%;
-`;
+export const Component_grid = styled(Grid)``;

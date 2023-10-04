@@ -1,7 +1,10 @@
 import styled from "@emotion/styled";
 import { Box, TextField, Typography } from "@mui/material";
 
-export const ExerciseWrapper = styled(Box)`
+export const ExerciseWrapper = styled(Box, {
+  shouldForwardProp: (prop) => !["iswidget", "isfocus"].includes(prop),
+  // Boolean타입 Emotion Props가 Dom 요소까지 전달되서 에러메세지가 출력됬음, 해당 문제에 대한 해결책
+})`
   width: ${(props) => (props.iswidget ? "30%" : "100%")};
   height: ${(props) => (props.iswidget ? "" : "100%")};
   display: flex;
