@@ -7,7 +7,7 @@ import { Grid } from "@mui/material";
 
 export default function ExercisePage() {
   return (
-    <S.RoutineLayout container spacing={4}>
+    <S.RoutineLayout container spacing={2}>
       <S.Component_grid item xs={4}>
         <Grid item xs={12} paddingBottom={1}>
           <ExerciseForm iswidget={false} />

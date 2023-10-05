@@ -6,12 +6,13 @@ import { useEffect, useRef, useState } from "react";
 import api from "../../../axios/axiosInstance";
 import { ItemTypes } from "../control/ITEM_TYPE";
 import { useDrag } from "react-dnd";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { isCreate } from "../../../store/exercise";
+import { useRecoilState } from "recoil";
+import { clickedExercise, isCreate } from "../../../store/exercise";
 
 export default function ExerciseList(props) {
   const [exerciseData, setExerciseData] = useState();
   const [isCreateValue, setIsCreateValue] = useRecoilState(isCreate);
+  const [Exercise, setExercise] = useRecoilState(clickedExercise);
   const username = JSON.parse(localStorage.getItem("user_data")).username || "";
   const noref = useRef();
 
@@ -42,13 +43,17 @@ export default function ExerciseList(props) {
     }
   };
 
-  const onClickDeleteAllExercise = async () => {
+  const onClickDeleteAllExercise = async (el) => {
     try {
       const res = await api.delete("/exercise/delete_exercise_all");
     } catch {
       // 모달이나 다이얼로그로 변경하기
       console.log("운동기록 전체 삭제에 실패했습니다");
     }
+  };
+
+  const onClickPushToRoutine = (el) => {
+    setExercise([...Exercise, { exercise_name: el.exercise_name, exercise_type: el.exercise_type }]);
   };
 
   useEffect(() => {
@@ -93,7 +98,7 @@ export default function ExerciseList(props) {
               <IconButton edge="end" sx={{ marginRight: "5px" }}>
                 <EditIcon />
               </IconButton>
-              <IconButton edge="end" sx={{ marginRight: "5px" }}>
+              <IconButton edge="end" sx={{ marginRight: "5px" }} onClick={() => onClickPushToRoutine(el)}>
                 <PlaylistAddIcon />
               </IconButton>
               <IconButton edge="end" aria-label="delete" onClick={() => onClickDeleteExercise(el)}>
