@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+# Workout - React
+---
+## 개요
+---
+Electron과 Typescript, Next, Firebase로 제작했던 프로젝트를 React, Js, Express, MongoDb로 다시 제작해보는 프로젝트 입니다.
+이전에는 루틴에 대한  CRUD만 제작했다면 이번엔 루틴관리, 루틴기반 타이머, 루틴을 공유할 수 있는 커뮤니티까지 클라리언트사이드, 서버사이드까지 직접 제작해 보려고 합니다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+10.06기준 로그인 100% / 운동관리페이지 90% 완료되었습니다. 
 
-## Available Scripts
+## 페이지 설명
+---
+1. 로그인
+JWT를 사용하여 로그인여부를 판단합니다. axios의 intercept메소드를 사용해 모든 요청시 토큰 만료 에러가 난다면  refreshToken을 사용해 토큰을 재발급 받고 실패한 요청을 다시 시도하도록 했습니다.
 
-In the project directory, you can run:
+2. 운동관리
+상태관리 라이브러리인 recoil을 적극적으로 사용해 다른 컴포넌트간 변동점이 생겨도 즉각적인 렌더링이 일어나도록 했습니다.
+운동과 루틴을 생성하고 생성한 운동을 루틴에 추가하는 방식입니다.
 
-### `npm start`
+3. 타이머 (준비중)
+생성한 루틴을 토대로 타이머를 사용할 수 있습니다. 운동사이에 휴식시간을 추가하면 운동을 끝내고 휴식시간일때 자동으로 타이머가 돌아가도록 제작할 예정입니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+4. 커뮤니티 (준비중)
+생성한 루틴을 다른사람과 공유할 수 있는 커뮤니티 페이지 입니다. react Lazyloading을 사용해 첫 로딩시엔 로딩되지 않고 nav에서 커뮤니티를 클릭했을때 로딩되도록 제작해 처음 로딩시간을 줄였습니다.
