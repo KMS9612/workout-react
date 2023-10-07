@@ -67,8 +67,8 @@ export default function SignupForm() {
         <S.InputStack spacing={2}>
           <TextField label="Name" onChange={(e) => setUSER_NAME(e.target.value)} type="text" />
           <TextField label="Email" onChange={(e) => setEMAIL_DATA(e.target.value)} type="email" />
-          <TextField label="Password" error={isMatch} helperText="비밀번호가 일치하지 않습니다." onChange={(e) => setPASSWORD_DATA(e.target.value)} type="password" />
-          <TextField label="Password Check" error={isMatch} helperText="비밀번호가 일치하지 않습니다." onChange={(e) => setPASSWORD_CHECK(e.target.value)} type="password" />
+          <TextField label="Password" error={isMatch} helperText={isMatch ? "비밀번호가 일치하지 않습니다." : ""} onChange={(e) => setPASSWORD_DATA(e.target.value)} type="password" />
+          <TextField label="Password Check" error={isMatch} helperText={isMatch ? "비밀번호가 일치하지 않습니다." : ""} onChange={(e) => setPASSWORD_CHECK(e.target.value)} type="password" />
           <S.BtnStack spacing={2}>
             <S.SignUpBtn loading={isLoading} variant="contained" onClick={onClickRegister}>
               회원가입

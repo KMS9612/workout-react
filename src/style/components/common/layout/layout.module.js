@@ -12,4 +12,7 @@ export const BodyWrapper = styled.div`
 export const NavWrapper = styled.div`
   width: 100%;
   height: 30px;
+  @media screen and (max-width: 800px) {
+    height: 50px;
+  }
 `;

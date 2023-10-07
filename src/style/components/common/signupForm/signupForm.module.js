@@ -8,10 +8,17 @@ export const SignUpForm = styled(Box)`
   height: 100%;
   display: flex;
   flex-direction: row;
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
 `;
 
 export const Left_SignUp = styled.div`
   width: 60%;
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    height: 50%;
+  }
 `;
 
 export const moveGradient = keyframes`
@@ -69,6 +76,9 @@ export const Right_SignUp = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 export const SignUpFormHeader = styled.h2`

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Box } from "@mui/material";
 import NavButton from "../../util/buttons/navbtn.jsx";
 
-export default function Navigation(props) {
+export default function Navigation() {
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -21,7 +21,6 @@ export default function Navigation(props) {
   ];
 
   const toggleDrawer = (anchor, open) => (event) => {
-    props.onMouseLeave();
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
       return;
     }
@@ -52,7 +51,7 @@ export default function Navigation(props) {
   };
 
   return (
-    <S.NavWrapper isOver={props.isOver}>
+    <S.NavWrapper>
       {["left", "right", "top", "bottom"].map((anchor) => (
         <React.Fragment key={anchor}>
           <S.HideNavButtons onClick={toggleDrawer(anchor, true)}>{anchor}</S.HideNavButtons>

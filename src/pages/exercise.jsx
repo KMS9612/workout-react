@@ -8,19 +8,19 @@ import { Grid } from "@mui/material";
 export default function ExercisePage() {
   return (
     <S.RoutineLayout container spacing={2}>
-      <S.Component_grid item xs={4}>
-        <Grid item xs={12} paddingBottom={1}>
+      <S.Component_grid item md={4}>
+        <Grid item md={12} paddingBottom={1}>
           <ExerciseForm iswidget={false} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item md={12}>
           <ExerciseList />
         </Grid>
       </S.Component_grid>
-      <S.Component_grid item xs={8}>
-        <Grid item xs={12} paddingBottom={1}>
+      <S.Component_grid item md={8}>
+        <Grid item md={12} paddingBottom={1}>
           <RoutineForm iswidget={false} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item md={12}>
           <RoutineList />
         </Grid>
       </S.Component_grid>

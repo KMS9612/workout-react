@@ -15,8 +15,10 @@ export const NavDrawer = styled(Drawer)`
 export const NavWrapper = styled.div`
   width: 100%;
   text-align: center;
-  opacity: ${(props) => (props.isOver ? 1 : 0)};
   transition: all 300ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Header1 = styled.h1`
@@ -39,4 +41,7 @@ export const ItemWrap = styled.div`
 
 export const HideNavButtons = styled(Button)`
   font-size: 12px;
+  @media screen and (max-width: 800px) {
+    font-size: 18px;
+  }
 `;

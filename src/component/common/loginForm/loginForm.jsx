@@ -6,7 +6,6 @@ import LoginAlert from "../../util/modals/login_alert.jsx";
 import { PromotionURL, TestURL } from "../../../axios/axiosInstance.js";
 import Cookie from "js-cookie";
 import { Button, TextField } from "@mui/material";
-import { Password } from "@mui/icons-material";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
