@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import LoginAlert from "../../util/modals/login_alert.jsx";
 import { PromotionURL, TestURL } from "../../../axios/axiosInstance.js";
 import Cookie from "js-cookie";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import { Password } from "@mui/icons-material";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -80,6 +81,11 @@ export default function LoginForm() {
     }
   };
 
+  const onClickSetTest = () => {
+    setEmail("malcomex@naver.com");
+    setPassword("123123123");
+  };
+
   return (
     <S.LoginForm>
       {/* Modal */}
@@ -99,9 +105,12 @@ export default function LoginForm() {
         <S.LoginFormHeader>로그인</S.LoginFormHeader>
         {/* <LoginInput isEmail={isEmail} checkEmail={checkEmail} /> */}
         <S.InputStack spacing={2}>
-          <TextField onKeyDown={isEnter} onChange={onChangeSaveVal} type="email" label="Email" />
-          <TextField onKeyDown={isEnter} onChange={onChangeSaveVal} type="password" label="Password" />
+          <TextField onKeyDown={isEnter} value={email} onChange={onChangeSaveVal} type="email" label="Email" />
+          <TextField onKeyDown={isEnter} value={password} onChange={onChangeSaveVal} type="password" label="Password" />
           <S.BtnStack spacing={2}>
+            <Button variant="contained" onClick={onClickSetTest}>
+              테스트 계정 사용하기
+            </Button>
             <S.LoginBtn loading={buttonLoading} variant="contained" onClick={onClickLogin}>
               로그인
             </S.LoginBtn>
