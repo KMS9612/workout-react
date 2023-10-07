@@ -2,6 +2,7 @@ import * as S from "../style/page/dashboard.module";
 import DashBoardBox from "../component/util/box/dashboardBox";
 import { useEffect, useState } from "react";
 import WelcomeDialog from "../component/util/modals/welcome_dialog";
+import { Typography } from "@mui/material";
 
 export default function DashBoard() {
   const [isFirst, setIsFirst] = useState(true);
@@ -13,8 +14,10 @@ export default function DashBoard() {
   return (
     <S.DBoardWrapper>
       <WelcomeDialog isOpen={isFirst} setIsFirst={setIsFirst} />
-      <DashBoardBox title={"운동"} contents_map={Dummy}></DashBoardBox>
-      <DashBoardBox title={"루틴"} contents_map={Dummy}></DashBoardBox>
+      <Typography variant="h3" sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "90%", color: "#ccc", textAlign: "center" }}>
+        DashBoard Page <br />
+        화면 상단의 Top,Bottom,Left,Right버튼을 눌러주세요
+      </Typography>
     </S.DBoardWrapper>
   );
 }

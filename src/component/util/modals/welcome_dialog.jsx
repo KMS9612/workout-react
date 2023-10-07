@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from "@mui/material";
 
 export default function WelcomeDialog(props) {
   const handleClose = () => {
@@ -6,9 +6,13 @@ export default function WelcomeDialog(props) {
   };
   return (
     <Dialog open={props.isOpen} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
-      <DialogTitle>환영합니다!</DialogTitle>
+      <DialogTitle sx={{ fontWeight: 700 }}>환영합니다</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">마우스를 위로 올려서 네비게이션 버튼을 클릭해보세요!</DialogContentText>
+        <DialogContentText id="alert-dialog-description">
+          화면 상단의 Top,Bottom,Left,Right버튼을 누르면
+          <br />
+          네비게이션메뉴가 나옵니다!
+        </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button variant="outlined" onClick={handleClose}>
