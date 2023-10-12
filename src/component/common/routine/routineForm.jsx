@@ -20,14 +20,7 @@ export default function RoutineForm(props) {
     const routine = [
       {
         routine_title: routineTitle,
-        routine_exercise: [
-          {
-            exercise_name: "",
-            exercise_type: "",
-            exercise_reps: 0,
-            exercise_sets: 0,
-          },
-        ],
+        routine_exercise: [],
       },
     ];
 

@@ -43,17 +43,8 @@ export default function ExerciseList(props) {
     }
   };
 
-  const onClickDeleteAllExercise = async (el) => {
-    try {
-      const res = await api.delete("/exercise/delete_exercise_all");
-    } catch {
-      // 모달이나 다이얼로그로 변경하기
-      console.log("운동기록 전체 삭제에 실패했습니다");
-    }
-  };
-
   const onClickPushToRoutine = (el) => {
-    setExercise([...Exercise, { exercise_name: el.exercise_name, exercise_type: el.exercise_type }]);
+    setExercise([...Exercise, { exercise_name: el.exercise_name, exercise_type: el.exercise_type, exercise_reps: 0, exercise_sets: 0 }]);
   };
 
   useEffect(() => {

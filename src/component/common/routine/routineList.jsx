@@ -14,7 +14,16 @@ export default function RoutineList(props) {
   const [isError, setIsError] = useState(false);
   const [err_msg, setErr_msg] = useState("");
   const [isUpdate, setIsUpdateRoutine] = useRecoilState(isCreateRoutine);
+  const [openRoutineId, setOpenRoutineId] = useState(null);
   const noref = useRef();
+
+  const handleOpenTable = (id) => {
+    if (openRoutineId === id) {
+      setOpenRoutineId(null);
+    } else {
+      setOpenRoutineId(id);
+    }
+  };
 
   const getRoutineData = async () => {
     await api
@@ -95,9 +104,12 @@ export default function RoutineList(props) {
           <DeleteIcon onClick={deleteAllRoutine} sx={{ cursor: "pointer" }} />
         </ListSubheader>
       }>
+      {/* Dialog 시작 */}
       <ErrorDialog setIsOpen={setIsError} isOpen={isError} err_msg={err_msg} />
+      {/* Dialog 종료 */}
+
       {routineList.length > 0 ? (
-        routineList.map((el, index) => <RoutineListDetail key={el._id} el={el} deleteRoutine={deleteRoutine} />)
+        routineList.map((el) => <RoutineListDetail key={el._id} el={el} deleteRoutine={deleteRoutine} isOpen={el._id === openRoutineId} onOpen={() => handleOpenTable(el._id)} />)
       ) : (
         <Stack spacing={2}>
           <Skeleton sx={{ width: "100%", height: "50px" }} variant="text" />

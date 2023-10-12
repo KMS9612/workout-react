@@ -35,6 +35,7 @@ export default function Navigation() {
       <Box
         sx={{
           width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
+          cursor: "pointer",
         }}
         role="dialog"
         onClick={toggleDrawer(anchor, false)}>
