@@ -1,4 +1,4 @@
-import { Collapse, IconButton, List, ListItemButton, ListItemText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Collapse, IconButton, List, ListItem, ListItemText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
@@ -8,8 +8,10 @@ import { clickedExercise } from "../../../store/exercise";
 import CheckIcon from "@mui/icons-material/Check";
 import RoutineTable from "./routineDetailTable";
 import CheckDeleteRoutine from "../../util/modals/check_delete";
+import TimerIcon from "@mui/icons-material/Timer";
 import api from "../../../axios/axiosInstance";
 import { isCreateRoutine, selectedRoutine } from "../../../store/routine";
+import { RoutineTimer } from "../../../store/timer";
 
 export default function RoutineListDetail(props) {
   const [isDelete, setIsDelete] = useState(false);
@@ -17,6 +19,7 @@ export default function RoutineListDetail(props) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [mergeRoutine, setMergeRoutine] = useRecoilState(selectedRoutine);
   const setIsUpdateRoutine = useSetRecoilState(isCreateRoutine);
+  const setTimer = useSetRecoilState(RoutineTimer);
 
   const onClickOpen = async () => {
     props.onOpen(); // 부모로부터 전달받은 onOpen 콜백 함수 호출
@@ -50,11 +53,20 @@ export default function RoutineListDetail(props) {
     });
   };
 
+  const onClickSetTimer = (routine) => {
+    setTimer(routine);
+  };
+
   return (
     <List component="div">
       <CheckDeleteRoutine setIsOpen={setIsDelete} isOpen={isDelete} deleteRoutine={props.deleteRoutine} el={props.el} />
-      <ListItemButton>
+      <ListItem>
         <ListItemText primary={props.el.routine_title} sx={{ minWidth: "200px", display: "flex", justifyContent: "flex-start", alignItems: "center" }} />
+        {props.isTimer && (
+          <IconButton edge="end" sx={{ marginRight: "5px" }} onClick={() => onClickSetTimer(props.el)}>
+            <TimerIcon />
+          </IconButton>
+        )}
         {props.isOpen ? (
           isEditMode ? (
             <IconButton edge="end" sx={{ marginRight: "5px" }} onClick={() => onClickSaveRoutine(props.el._id)}>
@@ -74,7 +86,7 @@ export default function RoutineListDetail(props) {
         <IconButton edge="end" onClick={onClickOpen}>
           {props.isOpen ? <ExpandLess /> : <ExpandMore />}
         </IconButton>
-      </ListItemButton>
+      </ListItem>
       <Collapse key={props.el._id} in={props.isOpen} timeout="auto" unmountOnExit>
         <RoutineTable Exercise={Exercise} isEditMode={isEditMode} routine={props.el}></RoutineTable>
       </Collapse>

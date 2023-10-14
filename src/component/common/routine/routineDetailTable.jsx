@@ -1,11 +1,11 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { clickedExercise } from "../../../store/exercise";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { selectedRoutine } from "../../../store/routine";
 
 export default function RoutineTable(props) {
-  const [Exercise, setExercise] = useRecoilState(clickedExercise);
+  const Exercise = useRecoilValue(clickedExercise);
   const [mergeExercise, setMergeExercise] = useRecoilState(selectedRoutine);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function RoutineTable(props) {
         <TableBody>
           {props.isEditMode
             ? mergeExercise.map((el, index) => (
-                <TableRow>
+                <TableRow key={el._id}>
                   <TableCell>{el.exercise_name}</TableCell>
                   <TableCell>{el.exercise_type}</TableCell>
                   <TableCell align="right">
@@ -54,7 +54,7 @@ export default function RoutineTable(props) {
                 </TableRow>
               ))
             : props.routine.routine_exercise.map((el) => (
-                <TableRow>
+                <TableRow key={el._id}>
                   <TableCell>{el.exercise_name}</TableCell>
                   <TableCell>{el.exercise_type}</TableCell>
                   <TableCell align="right">{el.exercise_reps}</TableCell>

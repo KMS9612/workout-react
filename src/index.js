@@ -4,7 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./global.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import DicePage from "./pages/dice";
+import DicePage from "./pages/timer";
 import ExercisePage from "./pages/exercise";
 import Layout from "./component/common/layout/layout";
 import SignUp from "./pages/signup";

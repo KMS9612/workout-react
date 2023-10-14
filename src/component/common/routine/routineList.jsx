@@ -109,7 +109,7 @@ export default function RoutineList(props) {
       {/* Dialog 종료 */}
 
       {routineList.length > 0 ? (
-        routineList.map((el) => <RoutineListDetail key={el._id} el={el} deleteRoutine={deleteRoutine} isOpen={el._id === openRoutineId} onOpen={() => handleOpenTable(el._id)} />)
+        routineList.map((el) => <RoutineListDetail key={el._id} el={el} deleteRoutine={deleteRoutine} isOpen={el._id === openRoutineId} onOpen={() => handleOpenTable(el._id)} isTimer={props.isTimer} />)
       ) : (
         <Stack spacing={2}>
           <Skeleton sx={{ width: "100%", height: "50px" }} variant="text" />
