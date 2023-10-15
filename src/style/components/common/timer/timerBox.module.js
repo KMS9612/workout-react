@@ -1,3 +1,4 @@
+import { Box, Stack } from "@mui/material";
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
@@ -49,6 +50,19 @@ export const WorkBox = styled.div`
   padding-left: 15px;
   @media screen and (max-width: 1000px) {
     width: 100%;
+  }
+`;
+
+export const TimerStart = styled(Stack)`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  @media screen and (max-width: 1000px) {
+    height: 70%;
   }
 `;
 

@@ -1,4 +1,4 @@
-import { Collapse, IconButton, List, ListItem, ListItemText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Collapse, IconButton, List, ListItem, ListItemText } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
@@ -26,10 +26,12 @@ export default function RoutineListDetail(props) {
 
     setIsEditMode(false);
   };
+
   const onClickEditRoutine = (event) => {
     setExercise([]);
     setIsEditMode((prev) => !prev);
   };
+
   const onClickSaveRoutine = async (routine_uid) => {
     // 변경점이 없을땐 post요청이 들어가지 않도록 조건문 걸기(예정)
 
