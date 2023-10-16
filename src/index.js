@@ -32,6 +32,7 @@ root.render(
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet" />
+    <link rel="icon" href="/logo.svg"></link>
     <DndProvider backend={HTML5Backend}>
       <RecoilRoot>
         <BrowserRouter>
