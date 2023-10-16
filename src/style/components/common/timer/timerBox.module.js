@@ -1,4 +1,5 @@
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
+import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
@@ -33,7 +34,7 @@ export const RecentWorkArea = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1200px) {
     flex-direction: column;
     height: 20%;
   }
@@ -43,12 +44,12 @@ export const WorkBox = styled.div`
   width: 50%;
   height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   border: 1px solid #ccc;
   padding-left: 15px;
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1200px) {
     width: 100%;
   }
 `;
@@ -61,8 +62,8 @@ export const TimerStart = styled(Stack)`
   justify-content: center;
   align-items: center;
   border: 1px solid #ccc;
-  @media screen and (max-width: 1000px) {
-    height: 70%;
+  @media screen and (max-width: 1200px) {
+    height: 60%;
   }
 `;
 
@@ -74,7 +75,65 @@ export const TimerArea = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px solid #ccc;
-  @media screen and (max-width: 1000px) {
-    height: 70%;
+  @media screen and (max-width: 1200px) {
+    height: 60%;
   }
+`;
+
+export const TimerBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const SubText = styled.div`
+  font-size: 18px;
+  font-weight: 600;
+`;
+
+export const moveGradient = keyframes`
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+`;
+
+export const moveWave = keyframes`
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 200%;
+  }
+`;
+
+export const LoadingContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(-45deg, #ff8375, #e53935, #ff9966, #ffe074);
+  background-size: 400% 400%;
+  animation: ${moveGradient} 5s ease infinite;
+`;
+export const LoadingText = styled.h1`
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+`;
+
+export const LoadingWave = styled.div`
+  width: 100%;
+  height: 15px;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  animation: ${moveWave} 1s linear infinite;
 `;
