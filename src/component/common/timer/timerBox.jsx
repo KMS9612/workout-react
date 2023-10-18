@@ -113,7 +113,7 @@ export default function TimerBox() {
         <S.RecentWorkArea>
           <S.WorkBox>
             <h2>세트당 횟수</h2>
-            <S.SubText>{routineTimer.routine_exercise[exerciseIndex].exercise_reps}</S.SubText>
+            <S.SubText>{routineTimer ? routineTimer.routine_exercise[exerciseIndex].exercise_reps : "루틴을 선택해주세요"}</S.SubText>
           </S.WorkBox>
           <S.WorkBox>
             <h2>남은 세트</h2>
