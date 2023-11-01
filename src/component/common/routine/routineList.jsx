@@ -99,17 +99,35 @@ export default function RoutineList(props) {
         cursor: props.iswidget ? "move" : "default",
       }}
       subheader={
-        <ListSubheader component="div" sx={{ backgroundColor: "#ff8375", display: "flex", alignItems: "center" }}>
+        <ListSubheader
+          component="div"
+          sx={{
+            backgroundColor: "#ff8375",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
           Routine List
           <DeleteIcon onClick={deleteAllRoutine} sx={{ cursor: "pointer" }} />
         </ListSubheader>
-      }>
+      }
+    >
       {/* Dialog 시작 */}
       <ErrorDialog setIsOpen={setIsError} isOpen={isError} err_msg={err_msg} />
       {/* Dialog 종료 */}
 
       {routineList.length > 0 ? (
-        routineList.map((el) => <RoutineListDetail key={el._id} el={el} deleteRoutine={deleteRoutine} isOpen={el._id === openRoutineId} onOpen={() => handleOpenTable(el._id)} isTimer={props.isTimer} />)
+        routineList.map((el) => (
+          <RoutineListDetail
+            iswidget={props.iswidget}
+            key={el._id}
+            el={el}
+            deleteRoutine={deleteRoutine}
+            isOpen={el._id === openRoutineId}
+            onOpen={() => handleOpenTable(el._id)}
+            isTimer={props.isTimer}
+          />
+        ))
       ) : (
         <Stack spacing={2}>
           <Skeleton sx={{ width: "100%", height: "50px" }} variant="text" />

@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import TimerBox from "../component/common/timer/timerBox";
 import RoutineList from "../component/common/routine/routineList";
 
-export default function DicePage() {
+export default function RoutineTimer() {
   return (
     <Grid
       container

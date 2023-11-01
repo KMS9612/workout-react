@@ -1,21 +1,26 @@
-import { BottomNavigation, BottomNavigationAction, Button, InputAdornment, TextField, Tooltip, Typography } from "@mui/material";
+import { Button, InputAdornment, TextField } from "@mui/material";
 import * as S from "../../../style/components/common/timer/timerBox.module";
 import { useRecoilValue } from "recoil";
 import { RoutineTimer } from "../../../store/timer";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDrag } from "react-dnd";
+import { ItemTypes } from "../control/ITEM_TYPE";
 
-export default function TimerBox() {
+export default function TimerBox(props) {
   const routineTimer = useRecoilValue(RoutineTimer);
   const [isStart, setIsStart] = useState(false);
   const [isExercise, setIsExercise] = useState();
-  const [restTime, setRestTime] = useState(null);
+  const [restTime, setRestTime] = useState("");
   const [restTimeSave, setRestTimeSave] = useState(null);
   const [currentSets, setCurrentSets] = useState(null);
   const [exerciseIndex, setExerciseIndex] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
+  const noref = useRef();
 
   useEffect(() => {
-    let sets = Number(routineTimer && routineTimer.routine_exercise[0].exercise_sets);
+    let sets = Number(
+      routineTimer && routineTimer.routine_exercise[0].exercise_sets
+    );
     setExerciseIndex(0);
     setCurrentSets(sets);
     setIsStart(false);
@@ -41,7 +46,12 @@ export default function TimerBox() {
   }, [isExercise]);
 
   const onClickStartTimer = () => {
-    if (restTime <= 0 || !routineTimer || routineTimer.routine_exercise.length === 0) return;
+    if (
+      restTime <= 0 ||
+      !routineTimer ||
+      routineTimer.routine_exercise.length === 0
+    )
+      return;
     setIsStart(true);
     setIsExercise(true);
     setRestTimeSave(restTime);
@@ -57,7 +67,9 @@ export default function TimerBox() {
       }
       // 한 운동의 Sets가 끝낫을때의 로직이 들어가는 곳
       setExerciseIndex((prev) => prev + 1);
-      setCurrentSets(Number(routineTimer.routine_exercise[exerciseIndex].exercise_sets));
+      setCurrentSets(
+        Number(routineTimer.routine_exercise[exerciseIndex].exercise_sets)
+      );
       return;
     }
     setIsExercise(false);
@@ -94,7 +106,9 @@ export default function TimerBox() {
     const remainingSeconds = seconds % 60;
 
     // 두 자릿수로 표시하기 위해 padStart 메서드 사용
-    return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
+    return `${String(minutes).padStart(2, "0")}:${String(
+      remainingSeconds
+    ).padStart(2, "0")}`;
   };
 
   const checkRestTime = (restTime) => {
@@ -106,14 +120,41 @@ export default function TimerBox() {
     }
   };
 
+  // drag and drop 관련 기능
+  const id = props.id;
+  let left = props.left;
+  let top = props.top;
+  const [{ isDragging }, drag] = useDrag(
+    () => ({
+      type: ItemTypes.BOX,
+      item: { id, left, top },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+    }),
+    [id, left, top]
+  );
+  if (isDragging) {
+    return <div ref={drag} />;
+  }
+
   return (
-    <S.Wrapper>
+    <S.Wrapper
+      ref={props.iswidget ? drag : noref}
+      iswidget={props.iswidget}
+      left={left}
+      top={top}
+    >
       <S.BoxTitle>Routine Timer</S.BoxTitle>
-      <S.TimerWrapper>
+      <S.TimerWrapper iswidget={props.iswidget}>
         <S.RecentWorkArea>
           <S.WorkBox>
             <h2>세트당 횟수</h2>
-            <S.SubText>{routineTimer ? routineTimer.routine_exercise[exerciseIndex].exercise_reps : "루틴을 선택해주세요"}</S.SubText>
+            <S.SubText>
+              {routineTimer
+                ? routineTimer.routine_exercise[exerciseIndex].exercise_reps
+                : "루틴을 선택해주세요"}
+            </S.SubText>
           </S.WorkBox>
           <S.WorkBox>
             <h2>남은 세트</h2>
@@ -122,10 +163,12 @@ export default function TimerBox() {
         </S.RecentWorkArea>
 
         {isStart ? (
-          <S.TimerArea>
+          <S.TimerArea iswidget={props.iswidget}>
             {isExercise ? (
               <S.LoadingContainer onClick={onClickLessSets}>
-                <S.LoadingText>화면을 클릭하거나 Space를 눌러 다음세트를 진행하세요!</S.LoadingText>
+                <S.LoadingText>
+                  화면을 클릭하거나 Space를 눌러 다음세트를 진행하세요!
+                </S.LoadingText>
                 <S.LoadingWave />
               </S.LoadingContainer>
             ) : (
@@ -135,12 +178,14 @@ export default function TimerBox() {
             )}
           </S.TimerArea>
         ) : (
-          <S.TimerStart spacing={2}>
+          <S.TimerStart spacing={2} iswidget={props.iswidget}>
             <TextField
               label="쉬는시간을 입력해주세요"
               autoComplete="off"
               InputProps={{
-                endAdornment: <InputAdornment position="end">Sec</InputAdornment>,
+                endAdornment: (
+                  <InputAdornment position="end">Sec</InputAdornment>
+                ),
               }}
               sx={{ width: "80%" }}
               value={restTime}
@@ -149,19 +194,34 @@ export default function TimerBox() {
               }}
             />
 
-            <Button disabled={routineTimer ? false : true} sx={{ width: "80%" }} variant="contained" onClick={onClickStartTimer}>
-              {routineTimer ? routineTimer.routine_title + "시작!" : "루틴을 선택해 주세요"}
+            <Button
+              disabled={routineTimer ? false : true}
+              sx={{ width: "80%" }}
+              variant="contained"
+              onClick={onClickStartTimer}
+            >
+              {routineTimer
+                ? routineTimer.routine_title + "시작!"
+                : "루틴을 선택해 주세요"}
             </Button>
           </S.TimerStart>
         )}
         <S.RecentWorkArea>
           <S.WorkBox>
             <h2>루틴</h2>
-            <S.SubText>{routineTimer ? routineTimer.routine_title : "루틴을 선택해주세요"} </S.SubText>
+            <S.SubText>
+              {routineTimer
+                ? routineTimer.routine_title
+                : "루틴을 선택해주세요"}{" "}
+            </S.SubText>
           </S.WorkBox>
           <S.WorkBox>
             <h2>진행중 운동</h2>
-            <S.SubText>{routineTimer && routineTimer.routine_exercise.length !== 0 ? routineTimer.routine_exercise[exerciseIndex].exercise_name : "운동을 추가해 주세요"}</S.SubText>
+            <S.SubText>
+              {routineTimer && routineTimer.routine_exercise.length !== 0
+                ? routineTimer.routine_exercise[exerciseIndex].exercise_name
+                : "운동을 추가해 주세요"}
+            </S.SubText>
           </S.WorkBox>
         </S.RecentWorkArea>
       </S.TimerWrapper>

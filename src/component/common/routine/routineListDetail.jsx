@@ -1,4 +1,10 @@
-import { Collapse, IconButton, List, ListItem, ListItemText } from "@mui/material";
+import {
+  Collapse,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
@@ -35,8 +41,12 @@ export default function RoutineListDetail(props) {
   const onClickSaveRoutine = async (routine_uid) => {
     // 변경점이 없을땐 post요청이 들어가지 않도록 조건문 걸기(예정)
 
-    const checkReps = mergeRoutine.filter((el) => el.exercise_reps === 0 || el.exercise_reps === undefined);
-    const checkSets = mergeRoutine.filter((el) => el.exercise_sets === 0 || el.exercise_sets === undefined);
+    const checkReps = mergeRoutine.filter(
+      (el) => el.exercise_reps === 0 || el.exercise_reps === undefined
+    );
+    const checkSets = mergeRoutine.filter(
+      (el) => el.exercise_sets === 0 || el.exercise_sets === undefined
+    );
 
     if (checkReps.length > 0 || checkSets.length > 0) {
       alert("Reps와 Sets를 모두 입력해주세요");
@@ -61,36 +71,75 @@ export default function RoutineListDetail(props) {
 
   return (
     <List component="div">
-      <CheckDeleteRoutine setIsOpen={setIsDelete} isOpen={isDelete} deleteRoutine={props.deleteRoutine} el={props.el} />
+      <CheckDeleteRoutine
+        setIsOpen={setIsDelete}
+        isOpen={isDelete}
+        deleteRoutine={props.deleteRoutine}
+        el={props.el}
+      />
       <ListItem>
-        <ListItemText primary={props.el.routine_title} sx={{ minWidth: "200px", display: "flex", justifyContent: "flex-start", alignItems: "center" }} />
-        {props.isTimer && (
-          <IconButton edge="end" sx={{ marginRight: "5px" }} onClick={() => onClickSetTimer(props.el)}>
-            <TimerIcon />
-          </IconButton>
-        )}
+        <ListItemText
+          primary={props.el.routine_title}
+          sx={{
+            minWidth: "200px",
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+          }}
+        />
+        {props.isTimer ||
+          (props.iswidget && (
+            <IconButton
+              edge="end"
+              sx={{ marginRight: "5px" }}
+              onClick={() => onClickSetTimer(props.el)}
+            >
+              <TimerIcon />
+            </IconButton>
+          ))}
         {props.isOpen ? (
           isEditMode ? (
-            <IconButton edge="end" sx={{ marginRight: "5px" }} onClick={() => onClickSaveRoutine(props.el._id)}>
+            <IconButton
+              edge="end"
+              sx={{ marginRight: "5px" }}
+              onClick={() => onClickSaveRoutine(props.el._id)}
+            >
               <CheckIcon />
             </IconButton>
           ) : (
-            <IconButton edge="end" sx={{ marginRight: "5px" }} onClick={onClickEditRoutine}>
+            <IconButton
+              edge="end"
+              sx={{ marginRight: "5px" }}
+              onClick={onClickEditRoutine}
+            >
               <EditIcon />
             </IconButton>
           )
         ) : (
           <div></div>
         )}
-        <IconButton edge="end" sx={{ marginRight: "5px" }} onClick={() => setIsDelete(true)}>
+        <IconButton
+          edge="end"
+          sx={{ marginRight: "5px" }}
+          onClick={() => setIsDelete(true)}
+        >
           <DeleteIcon />
         </IconButton>
         <IconButton edge="end" onClick={onClickOpen}>
           {props.isOpen ? <ExpandLess /> : <ExpandMore />}
         </IconButton>
       </ListItem>
-      <Collapse key={props.el._id} in={props.isOpen} timeout="auto" unmountOnExit>
-        <RoutineTable Exercise={Exercise} isEditMode={isEditMode} routine={props.el}></RoutineTable>
+      <Collapse
+        key={props.el._id}
+        in={props.isOpen}
+        timeout="auto"
+        unmountOnExit
+      >
+        <RoutineTable
+          Exercise={Exercise}
+          isEditMode={isEditMode}
+          routine={props.el}
+        ></RoutineTable>
       </Collapse>
     </List>
   );

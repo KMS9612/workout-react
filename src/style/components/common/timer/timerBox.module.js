@@ -3,10 +3,15 @@ import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  width: 100%;
+  position: ${(props) => (props.iswidget ? "absolute" : "block")};
+  width: ${(props) => (props.iswidget ? "40%" : "100%")};
+  height: ${(props) => (props.iswidget ? "500px" : "100%")};
   border: 1px solid #ff8376;
   border-radius: 5px;
-  overflow: hidden;
+  overflow: ${(props) => (props.iswidget ? "auto" : "hidden")};
+  left: ${(props) => props.left + "px"};
+  top: ${(props) => props.top + "px"};
+  cursor: ${(props) => (props.iswidget ? "move" : "default")};
 `;
 
 export const BoxTitle = styled.h2`
@@ -25,7 +30,7 @@ export const BoxTitle = styled.h2`
 
 export const TimerWrapper = styled.div`
   width: 100%;
-  height: 91vh;
+  height: ${(props) => (props.iswidget ? "90%" : "91vh")};
 `;
 
 export const RecentWorkArea = styled.div`
@@ -54,7 +59,9 @@ export const WorkBox = styled.div`
   }
 `;
 
-export const TimerStart = styled(Stack)`
+export const TimerStart = styled(Stack, {
+  shouldForwardProp: (prop) => !["iswidget"].includes(prop),
+})`
   width: 100%;
   height: 80%;
   display: flex;
